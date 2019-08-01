@@ -1,0 +1,78 @@
+.input-file {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 25px;
+    outline: none;
+    outline-color: transparent;
+    background-color: #880E4F;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.input-file::before {
+    content: "drag & drop l'image ou cliquer ici";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 106px;
+    transition: all 300ms ease-out;
+}
+.input-file[data-name]::before,
+.input-file[data-name]::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 3rem;
+    background-color: #3C3C3C;
+    transition: all 300ms ease-out;
+    pointer-events: none;
+}
+.input-file[data-name]::after {
+    content: '✕';
+    font-size: 4rem;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+}
+
+.input-file__input {
+    padding: 4em 2em;
+    opacity: 0;
+    cursor: pointer;
+}
+.input-file[data-name] .input-file__input {display: none}
+
+.input-file__preview {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-height: 50vh;
+    object-fit: cover;
+}
+
+/*
+ * HOVER
+ */
+
+.input-file:hover::before,
+.input-file:hover[data-name]::after {
+    font-size: .9rem;
+    opacity: .2;
+}
+.input-file:hover::after {
+    opacity: .75;
+}

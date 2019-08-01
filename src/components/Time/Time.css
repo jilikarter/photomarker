@@ -1,0 +1,52 @@
+.time {
+    position: absolute;
+    display: grid;
+    grid-gap: 0 .3em;
+    grid-template-areas:
+            'day month hour .'
+            'day year hour minute';
+    top: -1.5em;
+    left: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1.7em;
+    text-shadow: 1px 1px 5px rgba(30, 30, 30, .75);
+    color: #ECEFF1;
+    transform: translateY(-100%);
+}
+.time__day {
+    grid-area: day;
+    font-size: 5em;
+    line-height: .6em;
+}
+.time__month {
+    grid-area: month;
+    font-size: 2em;
+    letter-spacing: -.05em;
+}
+.time__year {
+    grid-area: year;
+    font-size: 2.2em;
+}
+.time__hour {
+    position: relative;
+    grid-area: hour;
+    align-self: end;
+    padding-left: 15px;
+    font-size: 3.5em;
+    line-height: 1.2em;
+}
+.time__minute {
+    grid-area: minute;
+    position: relative;
+    top: -2px;
+    font-weight: 400;
+    font-size: 1.6em;
+    line-height: 1.2em;
+}
+.time__minute::before {
+    content: ':';
+    position: relative;
+    top: -2px;
+}

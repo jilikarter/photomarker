@@ -1,0 +1,23 @@
+
+.header {
+    position: relative;
+    padding: 50px 0 20px;
+}
+.header h1 {
+    margin: 0 10vw;
+    text-align: right;
+}
+.header::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: calc(10vw + 135px);
+    width: 2px;
+    background-color: #ECEFF1;
+    box-shadow: 1px 1px 5px rgba(30, 30, 30, .75);
+}
+.main {
+    /*margin: 100px 0;*/
+}

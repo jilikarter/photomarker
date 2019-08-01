@@ -1,0 +1,15 @@
+.list {
+    position: relative;
+    margin-bottom: 150px;
+    overflow: hidden;
+}
+.list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(10vw + 135px);
+    width: 2px;
+    background-color: #ECEFF1;
+    box-shadow: 1px 1px 5px rgba(30, 30, 30, .75);
+}
