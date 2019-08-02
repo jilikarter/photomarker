@@ -1,11 +1,14 @@
 .geolocalisation {
     display: block;
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
     margin-right: 10px;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #76b7eb;
     border-radius: 32px;
+    background-color: #38648c;
+    background-color: #76b7eb;
     overflow: hidden;
 }
 .geolocalisation::before {

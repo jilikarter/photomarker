@@ -40,19 +40,18 @@ export class Form extends Component {
             this.setState({
                 picture: reader.result
             });
-            alert('photo uploadé avec succes');
         }
         reader.readAsDataURL(file);
     }
 
-    register() {
+    async register() {
 
         if(this.isAddAvailable()) {
 
             //Case if the user want the geolocalisation
             if(this.state.geolocalisation) {
 
-                addArticle({
+                await addArticle({
                     id: this.state.id,
                     title: this.state.title,
                     timestamp: this.state.timestamp,
@@ -62,7 +61,7 @@ export class Form extends Component {
                     city: this.state.city
                 });
             } else {
-                addArticle({
+                await addArticle({
                     id: this.state.id,
                     title: this.state.title,
                     timestamp: this.state.timestamp,
@@ -75,9 +74,6 @@ export class Form extends Component {
         } else {
             console.log('not fill completed');
         }
-
-
-        // addArticle(this.state);
     }
 
     isAddAvailable() {

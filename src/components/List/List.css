@@ -8,7 +8,7 @@
     content: '';
     position: absolute;
     top: 0;
-    bottom: 50px;
+    bottom: 80px;
     left: calc(10vw + 135px);
     width: 2px;
     background-color: #ECEFF1;

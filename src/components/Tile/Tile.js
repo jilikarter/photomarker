@@ -57,12 +57,12 @@ export class Tile extends Component {
         update(true);
     }
 
-    deleteTile() {
+    async deleteTile() {
         const { datas, update } = this.props;
         let response = window.confirm('etes vous sur de vouloir supprimer ?');
         if(response) {
 
-            deleteArticle(datas.id);
+            await deleteArticle(datas.id);
             update(true);
         }
     }

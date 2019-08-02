@@ -1,9 +1,9 @@
 import { firestore } from "../firebase";
 
 
-export const addArticle = (datas) => {
+export const addArticle = async (datas) => {
 
-    firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
+    return await firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
         'picture': datas.picture,
@@ -23,9 +23,9 @@ export const fbEditArticle = async (datas) => {
     });
 };
 
-export const deleteArticle = (id) => {
+export const deleteArticle = async (id) => {
 
-    firestore.collection('articles').doc(id).delete();
+    return await firestore.collection('articles').doc(id).delete();
 };
 
 export const getAllArticles = async () => {
