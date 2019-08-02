@@ -12,15 +12,15 @@ export const addArticle = (datas) => {
     });
 };
 
-export const editArticle = (datas) => {
+export const fbEditArticle = async (datas) => {
 
-    // firestore.collection('articles').doc(datas.id).set({
-    //     'timestamp': datas.timestamp,
-    //     'city': datas.city,
-    //     'picture': datas.picture,
-    //     'text': datas.text,
-    //     'disposition': datas.disposition
-    // });
+    return await firestore.collection('articles').doc(datas.id).set({
+        'timestamp': datas.timestamp,
+        'city': datas.city,
+        'picture': datas.picture,
+        'text': datas.text,
+        'disposition': datas.disposition
+    });
 };
 
 export const deleteArticle = (id) => {
@@ -28,11 +28,11 @@ export const deleteArticle = (id) => {
     firestore.collection('articles').doc(id).delete();
 };
 
-export const getAllArticles = () => {
+export const getAllArticles = async () => {
 
     const result = [];
     let query = firestore.collection('articles').orderBy("timestamp", "desc"); // .orderBy("timestamp, desc")
-    query.get()
+    await query.get()
         .then(snapshot => {
             snapshot.forEach(doc => {
                 result.push({id: doc.id, ...doc.data()});
@@ -45,11 +45,11 @@ export const getAllArticles = () => {
 };
 
 
-export const fbGetBirth = () => {
+export const fbGetBirth = async () => {
 
     const result = [];
     let query = firestore.collection('birth'); // .orderBy("timestamp, desc")
-    query.get()
+    await query.get()
         .then(snapshot => {
             snapshot.forEach(doc => {
                 result.push({id: doc.id, ...doc.data()});

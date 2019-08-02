@@ -31,6 +31,13 @@ export class Time extends Component {
         getTimestamp(date.valueOf());
     }
 
+    changeDateNow() {
+
+        moment.locale();
+        const date = moment();
+        this.changeDate(date.valueOf());
+    }
+
     render() {
 
         const { mode } = this.props;
@@ -38,8 +45,8 @@ export class Time extends Component {
         return (
             mode === 'edition'
                 ? <time className="time time--edition" dateTime={date.format('YYYY-MM-DD hh:mm')}>
-                    <input type="datetime-local" value={date.format('YYYY-MM-DDThh:mm')} onChange={(e) => {this.changeDate(e.target.value)}} />
-                    <button>NOW</button>
+                    <input type="datetime-local" value={date.format('YYYY-MM-DDTHH:mm')} onChange={(e) => {this.changeDate(e.target.value)}} />
+                    <button onClick={() => {this.changeDateNow()}}>AUJ</button>
                 </time>
                 : <time className="time" dateTime={date.format('YYYY-MM-DD hh:mm')}>
                     <span className="time__day">{date.format('DD')}</span>

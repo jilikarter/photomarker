@@ -81,11 +81,11 @@
     transform: translateX(-50%) translateY(-50%);
     transition: all 300ms ease-out;
 }
-.tile:not(.tile--edition) .tile__picture:hover::before,
-.tile:not(.tile--edition) .tile__picture:hover::after {
+.tile .tile__picture:hover::before,
+.tile .tile__picture:hover::after {
     opacity: .75;
 }
-.tile:not(.tile--edition) .tile__picture:hover::before {
+.tile .tile__picture:hover::before {
     animation: tall 2500ms ease-out infinite;
 }
 
@@ -130,19 +130,41 @@
     outline-color: transparent;
     transition: all 300ms ease-out;
 }
-.tile--edition .tile__manage button:nth-child(1),
-.tile__manage button:nth-child(2) {
-    display: none;
+.tile__manage button img {
+    max-width: 60%;
+    max-height: 60%;
+    filter: invert(1);
 }
 .tile__manage button:hover {
     transform: scaleX(1.2) scaleY(1.2);
 }
 
-.tile--edition {
+.tile--edition input,
+.tile--edition textarea {
+    display: inline-block;
+    position: relative;
+    padding: .5rem;
+    color: #FFFFFF;
+    border: none;
+    background-color: #3F51B5;
     background-color: #E91E63;
 }
-.tile--edition .tile__manage button:nth-child(2) {
-    display: block;
+.tile--edition input::placeholder,
+.tile--edition textarea::placeholder {
+    color: #FFFFFF;
+    font-style: italic;
+}
+.tile--edition textarea {
+    width: 100%;
+    resize: none;
+}
+
+.tile--edition .tile__picture::before {
+    background-image: none;
+}
+.tile--edition .tile__picture::after {
+    content: 'Vous ne pouvez pas modifier la photo. Pour se faire, veuillez supprimer complétement le post et en créer un nouveau';
+    font-size: 1rem;
 }
 
 

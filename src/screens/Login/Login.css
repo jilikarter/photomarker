@@ -21,10 +21,21 @@
     transition: all 300ms ease-out;
 }
 .login__password:hover {
-    background-color: #fbe8f3;
+    background-color: #cdd0ed;
 }
 .login__password:focus {
-    outline-color: #E91E63;
+    outline-color: #3F51B5;
+    background-color: #cdd0ed;
+}
+.login__password--error {
+    background-color: #E91E63;
+    color: #FAFAFA;
+}
+.login__error-message {
+    max-width: 500px;
+    font-size: .9rem;
+    font-style: italic;
+    color: #E91E63;
 }
 .login__button {
     margin-top: 1rem;
@@ -37,6 +48,8 @@
     border-radius: 4px;
     background-color: #3F51B5;
     cursor: pointer;
+    outline: none;
+    outline-color: transparent;
     transition: all 300ms ease-out;
 }
 .login__button:hover {

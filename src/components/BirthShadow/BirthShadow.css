@@ -8,9 +8,9 @@
 .birth-shadow__icon {
     width: 150px;
     margin: 100px 0 30px;
-    opacity: .5;
+    opacity: .8;
     filter: blur(8px) grayscale(.8);
-    animation: breathe-opacity 3s ease-out infinite;
+    animation: breathe-opacity 3s 1s ease-out infinite;
 }
 
 .birth-shadow__content {
@@ -77,12 +77,12 @@
 }
 @keyframes breathe-opacity {
     0% {
-        opacity: .5;
+        opacity: .8;
     }
     50% {
-        opacity: .2;
+        opacity: .5;
     }
     100% {
-        opacity: .5;
+        opacity: .8;
     }
 }

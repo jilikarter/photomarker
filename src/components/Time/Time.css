@@ -52,5 +52,19 @@
 }
 
 .time--edition {
+    grid-gap: 0;
     background-color: #E91E63;
+}
+.time.time--edition input {
+    top: 0;
+    margin: 1em;
+}
+.time.time--edition button {
+    width: 50px;
+    color: #FAFAFA;
+    border: none;
+    outline: none;
+    outline-color: transparent;
+    background-color: #3F51B5;
+    cursor: pointer;
 }

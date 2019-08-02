@@ -13,6 +13,7 @@ export class Login extends Component {
         passwordAdmin: ADMIN_ACCESS,
         authorized: false,
         isAdmin: false,
+        error: false,
         currentPassword: ''
     };
 
@@ -29,6 +30,10 @@ export class Login extends Component {
                 authorized: true,
                 isAdmin: true
             });
+        } else {
+            this.setState({
+                error: true
+            });
         }
     }
 
@@ -40,7 +45,7 @@ export class Login extends Component {
 
 
     render() {
-        const { authorized, isAdmin } = this.state;
+        const { authorized, isAdmin, error } = this.state;
         return (
             <React.Fragment>
                 {authorized
@@ -49,7 +54,12 @@ export class Login extends Component {
                         <section className="login">
                             <h1 className="login__title">Connectez vous</h1>
                             <p className="login__explain">Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site</p>
-                            <input className="login__password" placeholder="mot de passe (password)" name="password" onChange={e => this.handleChange(e) } type="password"/>
+                            <input className={`login__password${error ? ' login__password--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={e => this.handleChange(e) } type="password"/>
+                            {
+                                error
+                                ? <p className="login__error-message">Le mot de passe saisi n'est pas correct. En cas d'oubli ou perte de mot de passe, veuillez vous rapprochez de la personne qui vous l'a fourni.</p>
+                                : null
+                            }
                             <button className="login__button" onClick={e => this.handleLogin() }>Accéder</button>
                         </section>
                     )

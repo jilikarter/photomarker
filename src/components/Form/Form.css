@@ -7,6 +7,9 @@
     filter:url('#shadowed-goo');
     pointer-events: none;
 }
+.add-form > svg {
+    pointer-events: none;
+}
 .add-form * {pointer-events: all;}
 .add-form > input[type='checkbox'] {
     position: absolute;

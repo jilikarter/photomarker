@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import birthIcon from '../../assets/images/baby.svg';
+import editIcon from '../../assets/images/edit.svg';
+import saveIcon from '../../assets/images/save.svg';
 import {Time} from "../Time/Time";
 
 import './Birth.css';
@@ -27,7 +29,7 @@ export class Birth extends Component {
         this.setState({
             timestamp: timestamp
         });
-    }
+    };
 
     editBirth() {
         this.setState({
@@ -69,8 +71,7 @@ export class Birth extends Component {
                                 {
                                     isAdmin
                                         ?   <div className="birth__manage">
-                                                <button onClick={(e) => this.editBirth(e)}>edit</button>
-                                                <button onClick={(e) => this.saveBirth(e)}>save</button>
+                                                <button onClick={(e) => this.saveBirth(e)}><img src={saveIcon} /></button>
                                             </div>
                                         : null
                                 }
@@ -91,9 +92,8 @@ export class Birth extends Component {
                                 {
                                     isAdmin
                                         ?   <div className="birth__manage">
-                                            <button onClick={(e) => this.editBirth(e)}>edit</button>
-                                            <button onClick={(e) => this.saveBirth(e)}>save</button>
-                                        </div>
+                                                <button onClick={(e) => this.editBirth(e)}><img src={editIcon} /></button>
+                                            </div>
                                         : null
                                 }
                             </div>
