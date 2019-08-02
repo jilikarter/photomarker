@@ -40,6 +40,7 @@ export class Form extends Component {
             this.setState({
                 picture: reader.result
             });
+            alert('photo uploadé avec succes');
         }
         reader.readAsDataURL(file);
     }

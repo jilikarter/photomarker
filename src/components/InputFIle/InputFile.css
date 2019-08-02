@@ -60,7 +60,7 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-height: 50vh;
+    max-height: 40vh;
     object-fit: cover;
 }
 
@@ -75,4 +75,10 @@
 }
 .input-file:hover::after {
     opacity: .75;
+}
+
+@media screen and (max-width: 500px) {
+    .input-file__preview {
+        max-height: 30vh;
+    }
 }
