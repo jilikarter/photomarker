@@ -3,13 +3,29 @@ import { firestore } from "../firebase";
 
 export const addArticle = (datas) => {
 
-    firestore.collection('articles').add({
+    firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
         'picture': datas.picture,
         'text': datas.text,
         'disposition': datas.disposition
     });
+};
+
+export const editArticle = (datas) => {
+
+    // firestore.collection('articles').doc(datas.id).set({
+    //     'timestamp': datas.timestamp,
+    //     'city': datas.city,
+    //     'picture': datas.picture,
+    //     'text': datas.text,
+    //     'disposition': datas.disposition
+    // });
+};
+
+export const deleteArticle = (id) => {
+
+    firestore.collection('articles').doc(id).delete();
 };
 
 export const getAllArticles = () => {
@@ -28,7 +44,8 @@ export const getAllArticles = () => {
     return result;
 };
 
-export const getBirth = () => {
+
+export const fbGetBirth = () => {
 
     const result = [];
     let query = firestore.collection('birth'); // .orderBy("timestamp, desc")
@@ -42,4 +59,15 @@ export const getBirth = () => {
             console.log('Error getting documents', err);
         });
     return result;
+};
+
+export const fbEditBirth = (datas) => {
+
+    firestore.collection('birth').doc('first').set({
+        'name': datas.name,
+        'size': datas.size,
+        'text': datas.text,
+        'timestamp': datas.timestamp,
+        'weight': datas.weight
+    });
 };

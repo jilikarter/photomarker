@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import {InputFile} from "../InputFIle/InputFile";
 import { addArticle } from "../../services/Firebase";
 
+import moment from 'moment';
+import 'moment/locale/fr';
+
 import './Form.css';
 
 export class Form extends Component {
 
     state = {
+        id: null,
+        title: '',
         timestamp: null,
         geolocalisation: false,
         city: null,
@@ -20,8 +25,12 @@ export class Form extends Component {
         const now = Date.now();
         this.encodeImageFileAsURL(file);
         this.setState({
+            id: moment().format('YYYYMMDDHHmm'),
             timestamp: now
         });
+
+        //Generate ID
+
     }
 
     encodeImageFileAsURL(file) {
@@ -37,13 +46,14 @@ export class Form extends Component {
 
     register() {
 
-        console.log(this.state);
         if(this.isAddAvailable()) {
 
             //Case if the user want the geolocalisation
             if(this.state.geolocalisation) {
 
                 addArticle({
+                    id: this.state.id,
+                    title: this.state.title,
                     timestamp: this.state.timestamp,
                     picture: this.state.picture,
                     text: this.state.text,
@@ -52,6 +62,8 @@ export class Form extends Component {
                 });
             } else {
                 addArticle({
+                    id: this.state.id,
+                    title: this.state.title,
                     timestamp: this.state.timestamp,
                     picture: this.state.picture,
                     text: this.state.text,
@@ -69,7 +81,7 @@ export class Form extends Component {
 
     isAddAvailable() {
 
-        return (this.state.timestamp !== null && this.state.picture !== null && this.state.text !== null);
+        return (this.state.timestamp !== null && this.state.picture !== null && this.state.id !== null && this.state.title !== ''); //&& this.state.text !== null
     }
 
     getGeolocalisation() {
@@ -114,9 +126,10 @@ export class Form extends Component {
                 <input type="checkbox" id="add-button" />
                 <label className="add-form__add-button" htmlFor="add-button"></label>
                 <div className="add-form__content">
+                    <input className="add-form__content__title" placeholder="titre (obligatoire et sans espaces)" type="text" value={this.state.title} onChange={e => this.setState({ title: e.target.value})} />
                     <InputFile name="file" id="file" getImage={this.getPicture} />
                     <textarea className="add-form__content__text" name="text" id="text" value={this.state.text} onChange={e => this.setState({ text: e.target.value})} placeholder="Ajout du texte ici"></textarea>
-                    <p className="add-form__geolocalisation" htmlFor="geolocalisation" onClick={e => this.getGeolocalisation()}>
+                    <p className="add-form__geolocalisation" htmlFor="geolocalisation" onClick={() => this.getGeolocalisation()}>
                         {
                             (this.state.city === null || !this.state.geolocalisation)
                             ? 'Geolocalisation'

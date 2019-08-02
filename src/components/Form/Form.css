@@ -99,6 +99,7 @@
     opacity: 1;
 }
 
+.add-form__content__title,
 .add-form__content__text {
     width: 100%;
     min-height: 100px;
@@ -108,6 +109,11 @@
     background-color: #FCE4EC;
     resize: none;
     box-sizing: border-box;
+}
+.add-form__content__title {
+    min-height: auto;
+    margin-bottom: 25px;
+    padding: .8em;
 }
 
 .add-form__geolocalisation {

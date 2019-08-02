@@ -1,5 +1,6 @@
 .list {
     position: relative;
+    min-height: 50vh;
     margin-bottom: 150px;
     overflow: hidden;
 }

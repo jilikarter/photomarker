@@ -1,0 +1,88 @@
+.birth-shadow {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px 10vw 0;
+}
+.birth-shadow__icon {
+    width: 150px;
+    margin: 100px 0 30px;
+    opacity: .5;
+    filter: blur(8px) grayscale(.8);
+    animation: breathe-opacity 3s ease-out infinite;
+}
+
+.birth-shadow__content {
+    position: relative;
+    z-index: 0;
+    align-self: stretch;
+    padding: 1em;
+    color: #3C3C3C;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+.birth-shadow__name {
+    margin-top: 0;
+    min-height: 1em;
+    animation: breathe 3s ease-out infinite;
+}
+
+.birth-shadow__weight,
+.birth-shadow__size {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    margin: 0;
+    font-size: 3em;
+    color: #282c34;
+    font-weight: 800;
+}
+.birth-shadow__weight:before,
+.birth-shadow__size::before {
+    content: '';
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+    opacity: .75;
+    animation: breathe 3s ease-out infinite;
+}
+.birth-shadow__weight__unit,
+.birth-shadow__size__unit {
+    display: none;
+}
+
+.birth-shadow .time > * {
+    color: transparent;
+    text-shadow: none;
+    animation: breathe 3s ease-out infinite;
+}
+.birth-shadow .time__hour {
+    padding-left: 0;
+    margin-left: 15px;
+}
+
+@keyframes breathe {
+    0% {
+        background-color: #9f9f9f;
+    }
+    50% {
+        background-color: #d4d4d4;
+    }
+    100% {
+        background-color: #9f9f9f;
+    }
+}
+@keyframes breathe-opacity {
+    0% {
+        opacity: .5;
+    }
+    50% {
+        opacity: .2;
+    }
+    100% {
+        opacity: .5;
+    }
+}

@@ -1,40 +1,68 @@
 import React, { Component } from 'react';
+import {fbGetBirth, getAllArticles} from "../../services/Firebase";
 
 import {Tile} from "../Tile/Tile";
 import {Birth} from "../Birth/Birth";
-
-import { getAllArticles } from "../../services/Firebase";
+import {BirthShadow} from "../BirthShadow/BirthShadow";
 
 import './List.css';
 
 export class List extends Component {
 
     state = {
-        articles: []
+        articles: [],
+        birth: null
     };
 
-    componentDidMount() {
-
+    fetchAll() {
         const articles = getAllArticles();
-
         setTimeout(() => {
             this.setState({
                 articles
             });
-        }, 400);
+        }, 600);
+    }
+
+    componentDidMount() {
+
+        this.fetchAll();
+        const births = fbGetBirth();
+
+        setTimeout(() => {
+            let birth = {};
+            births.map( item  => (
+                birth = item
+            ));
+            this.setState({
+                birth: {
+                    name: birth.name,
+                    size: birth.size,
+                    weight: birth.weight,
+                    text: birth.text,
+                    timestamp: birth.timestamp
+                }
+            });
+        }, 1000);
     }
 
     render() {
 
         const { isAdmin } = this.props;
-        const list = this.state.articles;
-
+        const { articles, birth } = this.state;
         return (
             <section className="list">
-                {list.map( item  => (
-                    <Tile datas={item} isAdmin={isAdmin} key={Math.random() * 100} />
-                ))}
-                <Birth/>
+                {
+                    articles.length !== 0
+                    ? articles.map( item  => (
+                            <Tile datas={item} isAdmin={isAdmin} key={Math.random() * 100} update={() => this.fetchAll} />
+                        ))
+                    : null
+                }
+                {
+                    birth
+                        ? <Birth datas={birth} isAdmin={isAdmin} />
+                        : <BirthShadow />
+                }
             </section>
         );
     }
