@@ -123,3 +123,15 @@
     font-weight: 800;
     text-align: center;
 }
+
+@media screen and (max-width: 740px) {
+    .birth__icon {
+        align-self: flex-end;
+    }
+}
+@media screen and (max-width: 450px) {
+    .birth__manage {
+        top: 5px;
+        right: 0;
+    }
+}

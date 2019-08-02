@@ -4,6 +4,8 @@ import { Home } from "../Home/Home";
 
 import { VISITOR_ACCESS, ADMIN_ACCESS } from "../../env";
 
+import './Login.css';
+
 export class Login extends Component {
 
     state = {
@@ -14,7 +16,7 @@ export class Login extends Component {
         currentPassword: ''
     };
 
-    handleLogin(e) {
+    handleLogin() {
         const { currentPassword, passwordGuest, passwordAdmin } = this.state;
 
         if(currentPassword === passwordGuest) {
@@ -44,11 +46,12 @@ export class Login extends Component {
                 {authorized
                     ? <Home isAdmin={isAdmin} />
                     : (
-                        <React.Fragment>
-                            <h1>Login</h1>
-                            <input name="password" onChange={e => this.handleChange(e) } type="password"/>
-                            <button onClick={e => this.handleLogin(e) }>Accéder</button>
-                        </React.Fragment>
+                        <section className="login">
+                            <h1 className="login__title">Connectez vous</h1>
+                            <p className="login__explain">Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site</p>
+                            <input className="login__password" placeholder="mot de passe (password)" name="password" onChange={e => this.handleChange(e) } type="password"/>
+                            <button className="login__button" onClick={e => this.handleLogin() }>Accéder</button>
+                        </section>
                     )
                 }
                 {isAdmin

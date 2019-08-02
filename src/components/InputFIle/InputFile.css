@@ -12,14 +12,14 @@
 .input-file::before {
     content: "drag & drop l'image ou cliquer ici";
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
     bottom: 0;
     left: 0;
     opacity: 1;
     text-align: center;
     font-size: 1rem;
-    line-height: 106px;
+    transform: translateY(-50%);
     transition: all 300ms ease-out;
 }
 .input-file[data-name]::before,

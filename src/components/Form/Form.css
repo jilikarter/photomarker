@@ -63,7 +63,8 @@
 
     right: 45px;
     bottom: 45px;
-
+    min-width: 200px;
+    max-width: calc(100vw - 180px);
     padding: 25px;
     background-color: #FF0266;
     background-color: #E91E63;
