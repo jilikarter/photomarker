@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Form } from '../../components/Form/Form';
 import { Home } from "../Home/Home";
 
+import { VISITOR_ACCESS, ADMIN_ACCESS } from "../../env";
+
 export class Login extends Component {
 
     state = {
-        passwordGuest: "toto",
-        passwordAdmin: 'free',
+        passwordGuest: VISITOR_ACCESS,
+        passwordAdmin: ADMIN_ACCESS,
         authorized: false,
         isAdmin: false,
         currentPassword: ''
