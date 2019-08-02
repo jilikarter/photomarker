@@ -38,13 +38,7 @@ export class List extends Component {
             birth = item
         ));
         this.setState({
-            birth: {
-                name: birth.name,
-                size: birth.size,
-                weight: birth.weight,
-                text: birth.text,
-                timestamp: birth.timestamp
-            }
+            birth: birth
         });
     }
 

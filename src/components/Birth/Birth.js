@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import birthIcon from '../../assets/images/baby.svg';
 import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
+import {GeolocalisationIcon} from "../GeolocalisationIcon/GeolocalisationIcon";
 import {Time} from "../Time/Time";
 
 import './Birth.css';
@@ -13,8 +14,9 @@ export class Birth extends Component {
     constructor(props) {
         super(props);
 
-        const { name, weight, size, text, timestamp } = this.props.datas;
+        const { city, name, weight, size, text, timestamp } = this.props.datas;
         this.state = {
+            city: city,
             name: name,
             size: size,
             weight: weight,
@@ -41,8 +43,9 @@ export class Birth extends Component {
         this.setState({
             mode: 'read'
         });
-        const { name, weight, size, text, timestamp } = this.state;
+        const { city, name, weight, size, text, timestamp } = this.state;
         fbEditBirth({
+            'city': city,
             'name': name,
             'size': size,
             'text': text,
@@ -54,7 +57,7 @@ export class Birth extends Component {
     render() {
 
         const { isAdmin } = this.props;
-        const { name, weight, size, text, timestamp } = this.state;
+        const { city, name, weight, size, text, timestamp } = this.state;
 
         return (
             <React.Fragment>
@@ -64,6 +67,7 @@ export class Birth extends Component {
                             <img className="birth__icon" src={birthIcon} alt="Icon of baby. His clothes are blue because it's a boy" />
                             <div className="birth__content">
                                 <Time time={timestamp} mode={this.state.mode} getTimestamp={this.updateTimestamp} />
+                                <p className="tile__geolocalisation">{GeolocalisationIcon}<input placeholder="Ville" type="text" value={city ? city : ''} onChange={e => this.setState({ city: e.target.value})} /></p>
                                 <p className="birth__name">Je m'appelle <input placeholder="Prénom(s)" type="text" value={name} onChange={e => this.setState({ name: e.target.value})} /></p>
                                 <p className="birth__weight"><input type="text" value={weight} onChange={e => this.setState({ weight: e.target.value})} /><span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size"><input type="text" value={size} onChange={e => this.setState({ size: e.target.value})} /><span className="birth__weight__unit">cm</span></p>
@@ -81,6 +85,7 @@ export class Birth extends Component {
                             <img className="birth__icon" src={birthIcon} alt="Icon of baby. His clothes are blue because it's a boy" />
                             <div className="birth__content">
                                 <Time time={timestamp}/>
+                                <p className="birth__geolocalisation">{GeolocalisationIcon}{city}</p>
                                 <p className="birth__name">Je m'appelle {name}</p>
                                 <p className="birth__weight">{weight}<span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size">{size}<span className="birth__weight__unit">cm</span></p>

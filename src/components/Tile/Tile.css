@@ -103,9 +103,6 @@
 /*
  * MODIFIER
  */
-.tile--admin {
-
-}
 .tile__manage {
     display: flex;
     position: absolute;

@@ -64,6 +64,7 @@ export const fbGetBirth = async () => {
 export const fbEditBirth = (datas) => {
 
     firestore.collection('birth').doc('first').set({
+        'city': datas.city,
         'name': datas.name,
         'size': datas.size,
         'text': datas.text,
