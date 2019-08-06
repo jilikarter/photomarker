@@ -5,6 +5,7 @@ import {Tile} from "../Tile/Tile";
 import {Birth} from "../Birth/Birth";
 import {BirthShadow} from "../BirthShadow/BirthShadow";
 import {TileShadow} from "../TileShadow/TileShadow";
+import {Form} from "../Form/Form";
 
 import './List.css';
 
@@ -47,20 +48,28 @@ export class List extends Component {
         const { isAdmin } = this.props;
         const { articles, birth, shadowTile } = this.state;
         return (
-            <section className="list">
-                {
-                    articles.length !== 0
-                    ? articles.map( item  => (
-                            <Tile datas={item} isAdmin={isAdmin} key={Math.random() * 100} update={this.fetchAll} />
-                        ))
-                    : shadowTile ? <TileShadow /> : null
+            <React.Fragment>
+                <section className="list">
+                    {
+                        articles.length !== 0
+                        ? articles.map( item  => (
+                                <Tile datas={item} isAdmin={isAdmin} key={Math.random() * 100} update={this.fetchAll} />
+                            ))
+                        : shadowTile ? <TileShadow /> : null
+                    }
+                    {
+                        birth
+                            ? <Birth datas={birth} isAdmin={isAdmin} />
+                            : <BirthShadow />
+                    }
+                </section>
+                {isAdmin
+                    ? (
+                        <Form addComplete={this.fetchAll} />
+                    )
+                    : null
                 }
-                {
-                    birth
-                        ? <Birth datas={birth} isAdmin={isAdmin} />
-                        : <BirthShadow />
-                }
-            </section>
+            </React.Fragment>
         );
     }
 }

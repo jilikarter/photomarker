@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 .input-file::before {
-    content: "drag & drop l'image ou cliquer ici";
+    content: "drag & drop l'image ou cliquer ici (131 Mo max)";
     position: absolute;
     top: 50%;
     right: 0;

@@ -5,6 +5,7 @@
 }
 .header h1 {
     margin: 0 10vw;
+    font-size: 3rem;
     text-align: right;
 }
 .header::before {

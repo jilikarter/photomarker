@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import { List } from "../../components/List/List";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './Home.css';
 
@@ -16,6 +18,7 @@ export class Home extends Component {
                 <main className="main">
                     <List isAdmin={isAdmin} />
                 </main>
+                <ToastContainer />
             </React.Fragment>
         );
     }

@@ -1,20 +1,29 @@
 .geolocalisation {
     display: block;
     position: relative;
-    width: 35px;
-    height: 35px;
-    min-width: 35px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
     margin-right: 10px;
-    border-radius: 32px;
+    border-radius: 18px;
     background-color: #38648c;
     background-color: #76b7eb;
-    overflow: hidden;
     transform: rotateZ(21deg);
+    transform-style: preserve-3d;
 }
-.geolocalisation::before {
+.geolocalisation__mappemonde {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
+    overflow: hidden;
+}
+.geolocalisation__mappemonde::before {
     content: '';
     display: block;
     position: absolute;
+    z-index: 0;
     top: 50%;
     left: 0;
     width: 116px;
@@ -24,27 +33,27 @@
     background-position: 0px center;
     background-repeat: repeat-x;
     transform: translateY(-50%);
-    animation: rotate-earth 25s linear infinite;
+    animation: rotate-earth 20s linear infinite;
 }
 .geolocalisation::after {
     content: '';
     display: block;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: .3;
-    background-color: #3C3C3C;
-    background: linear-gradient(to right, #FFFFFF 0%, #000000 80%);
+    border-radius: 50%;
+    box-shadow: -7px -2px 10px 3px rgba(40, 44, 52, .9) inset;
     transform: rotateZ(-21deg);
 }
 
 @keyframes rotate-earth {
     from {
-        transform: translateX(0) translateY(-50%);
+        transform: translateX(-56.6px) translateY(-50%);
     }
     to {
-        transform: translateX(-56.6px) translateY(-50%);
+        transform: translateX(0) translateY(-50%);
     }
 }

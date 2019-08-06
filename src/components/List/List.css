@@ -1,8 +1,8 @@
 .list {
     position: relative;
     min-height: 50vh;
-    margin-bottom: 150px;
-    overflow: hidden;
+    margin-bottom: 15vh;
+    padding-top: 15vh;
 }
 .list::before {
     content: '';

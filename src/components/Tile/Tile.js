@@ -5,6 +5,7 @@ import {deleteArticle, fbEditArticle } from "../../services/Firebase";
 import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import deleteIcon from '../../assets/images/delete.svg';
+import { toast } from 'react-toastify';
 
 
 import './Tile.css';
@@ -55,6 +56,7 @@ export class Tile extends Component {
             disposition: disposition
         });
         update(true);
+        toast.info('La photo a bien été mise à jour');
     }
 
     async deleteTile() {
@@ -64,6 +66,7 @@ export class Tile extends Component {
 
             await deleteArticle(datas.id);
             update(true);
+            toast.info('La photo a bien été supprimée');
         }
     }
 
@@ -93,7 +96,7 @@ export class Tile extends Component {
                             <Time time={timestamp}/>
                             {
                                 city
-                                    ? <p className="tile__geolocalisation">{GeolocalisationIcon}{city}</p>
+                                    ? <div className="tile__geolocalisation">{GeolocalisationIcon}<p>{city}</p></div>
                                     : null
                             }
                             <figure className="tile__picture">

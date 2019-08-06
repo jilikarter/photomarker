@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {InputFile} from "../InputFIle/InputFile";
 import { addArticle } from "../../services/Firebase";
+import { toast } from 'react-toastify';
 
 import moment from 'moment';
 import 'moment/locale/fr';
@@ -10,6 +11,7 @@ import './Form.css';
 export class Form extends Component {
 
     state = {
+        open: false,
         id: null,
         title: '',
         timestamp: null,
@@ -40,39 +42,58 @@ export class Form extends Component {
             this.setState({
                 picture: reader.result
             });
+            toast.info('La photo à bien été uploadé');
         }
         reader.readAsDataURL(file);
     }
 
     async register() {
 
+        const { addComplete } = this.props;
+
         if(this.isAddAvailable()) {
 
             //Case if the user want the geolocalisation
             if(this.state.geolocalisation) {
 
-                await addArticle({
-                    id: this.state.id,
-                    title: this.state.title,
-                    timestamp: this.state.timestamp,
-                    picture: this.state.picture,
-                    text: this.state.text,
-                    disposition: this.state.disposition,
-                    city: this.state.city
-                });
+                try {
+                    await addArticle({
+                        id: this.state.id,
+                        title: this.state.title,
+                        timestamp: this.state.timestamp,
+                        picture: this.state.picture,
+                        text: this.state.text,
+                        disposition: this.state.disposition,
+                        city: this.state.city
+                    });
+                    this.resetForm();
+                    addComplete();
+                    toast.success('La photo a bien été enregistrée');
+                } catch (e) {
+                    toast.error(e);
+                }
             } else {
-                await addArticle({
-                    id: this.state.id,
-                    title: this.state.title,
-                    timestamp: this.state.timestamp,
-                    picture: this.state.picture,
-                    text: this.state.text,
-                    disposition: this.state.disposition,
-                    city: null
-                });
+                try {
+                    await addArticle({
+                        id: this.state.id,
+                        title: this.state.title,
+                        timestamp: this.state.timestamp,
+                        picture: this.state.picture,
+                        text: this.state.text,
+                        disposition: this.state.disposition,
+                        city: null
+                    });
+                    this.resetForm();
+                    addComplete();
+                    toast.success('La photo a bien été enregistrée');
+                } catch (e) {
+                    toast.error(e.text);
+                    console.log(e);
+                }
             }
         } else {
-            console.log('not fill completed');
+
+            toast.error('Tous les champs doivent être remplis');
         }
     }
 
@@ -117,10 +138,27 @@ export class Form extends Component {
         });
     }
 
+    resetForm() {
+        this.setState({
+            open: !this.state.open,
+
+            id: null,
+            title: '',
+            timestamp: null,
+            geolocalisation: false,
+            picture: null,
+            text: '',
+            disposition: 'default'
+        });
+    }
+
     render() {
+
+        const { open } = this.state;
+
         return (
             <section className="add-form">
-                <input type="checkbox" id="add-button" />
+                <input type="checkbox" id="add-button" checked={open} onChange={(e) => this.setState({open: e.target.checked})} />
                 <label className="add-form__add-button" htmlFor="add-button"></label>
                 <div className="add-form__content">
                     <input className="add-form__content__title" placeholder="titre (obligatoire et sans espaces)" type="text" value={this.state.title} onChange={e => this.setState({ title: e.target.value})} />

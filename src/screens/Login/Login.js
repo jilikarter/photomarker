@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form } from '../../components/Form/Form';
 import { Home } from "../Home/Home";
 
 import { VISITOR_ACCESS, ADMIN_ACCESS } from "../../env";
@@ -17,7 +16,8 @@ export class Login extends Component {
         currentPassword: ''
     };
 
-    handleLogin() {
+    handleLogin(e) {
+        e.preventDefault();
         const { currentPassword, passwordGuest, passwordAdmin } = this.state;
 
         if(currentPassword === passwordGuest) {
@@ -51,24 +51,18 @@ export class Login extends Component {
                 {authorized
                     ? <Home isAdmin={isAdmin} />
                     : (
-                        <section className="login">
+                        <form className="login" onSubmit={(e) => this.handleLogin(e)}>
                             <h1 className="login__title">Connectez vous</h1>
                             <p className="login__explain">Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site</p>
-                            <input className={`login__password${error ? ' login__password--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={e => this.handleChange(e) } type="password"/>
+                            <input className={`login__password${error ? ' login__password--error' : ''}`} autoFocus={true} placeholder="mot de passe (password)" name="password" onChange={e => this.handleChange(e) } type="password"/>
                             {
                                 error
                                 ? <p className="login__error-message">Le mot de passe saisi n'est pas correct. En cas d'oubli ou perte de mot de passe, veuillez vous rapprochez de la personne qui vous l'a fourni.</p>
                                 : null
                             }
-                            <button className="login__button" onClick={e => this.handleLogin() }>Accéder</button>
-                        </section>
+                            <button className="login__button">Accéder</button>
+                        </form>
                     )
-                }
-                {isAdmin
-                    ? (
-                        <Form />
-                    )
-                    : null
                 }
             </React.Fragment>
         );

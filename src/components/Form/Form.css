@@ -27,8 +27,6 @@
     border: none;
     outline: none;
     outline-color: transparent;
-    background-color: #FF0266;
-    background-color: #3F51B5;
     background-color: #E91E63;
     cursor: pointer;
     transition: all 300ms ease-out;
@@ -68,13 +66,14 @@
     bottom: 45px;
     min-width: 200px;
     max-width: calc(100vw - 180px);
+    max-height: calc(100vh - 140px);
     padding: 25px;
-    background-color: #FF0266;
     background-color: #E91E63;
     border-radius: 25px;
     transform: scaleX(0) scaleY(0) translate3d(0,0,0);
     transform-origin: 100% 100%;
     transition: all 400ms ease-out;
+    overflow-y: auto;
 }
 .add-form__content > * {
     opacity: 0;
@@ -204,4 +203,10 @@
     width: 4px;
     height: 20px;
     transition: all 300ms 200ms ease-out, font-size 300ms 0ms ease-out;
+}
+
+@media screen and (max-height: 540px) {
+    .add-form {
+        transform: translateX(20px) translateY(20px);
+    }
 }

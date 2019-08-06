@@ -8,6 +8,7 @@ import {Time} from "../Time/Time";
 
 import './Birth.css';
 import { fbEditBirth } from "../../services/Firebase";
+import { toast } from 'react-toastify';
 
 export class Birth extends Component {
 
@@ -52,6 +53,7 @@ export class Birth extends Component {
             'timestamp': timestamp,
             'weight': weight
         });
+        toast.success('Les données ont bien été mise à jour');
     }
 
     render() {

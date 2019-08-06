@@ -10,8 +10,6 @@ export class InputFile extends Component {
             fileName: null,
             file: ''
         }
-
-        // this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {

@@ -1,16 +1,27 @@
 import { firestore } from "../firebase";
 
 
-export const addArticle = async (datas) => {
+export const addArticle = (datas) => new Promise((resolve, reject) => {
 
-    return await firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
+    firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
         'picture': datas.picture,
         'text': datas.text,
         'disposition': datas.disposition
-    });
-};
+    }).then(() => resolve(true)).catch((error) => reject(error));
+});
+
+// export const addArticle = async (datas) => {
+//
+//     return await firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
+//         'timestamp': datas.timestamp,
+//         'city': datas.city,
+//         'picture': datas.picture,
+//         'text': datas.text,
+//         'disposition': datas.disposition
+//     });
+// };
 
 export const fbEditArticle = async (datas) => {
 
