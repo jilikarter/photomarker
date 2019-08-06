@@ -39,12 +39,25 @@ export class Form extends Component {
 
         let reader = new FileReader();
         reader.onloadend = () => {
-            this.setState({
-                picture: reader.result
-            });
-            toast.info('La photo à bien été uploadé');
+
+            if(this.lengthInUtf8Bytes(reader.result) <= 1048487) {
+
+                console.log(reader.result);
+                this.setState({
+                    picture: reader.result
+                });
+                toast.info('La photo à bien été uploadé');
+            } else {
+                toast.error('La photo est trop volumineuse');
+            }
         }
         reader.readAsDataURL(file);
+    }
+
+    lengthInUtf8Bytes(str) {
+        // Matches only the 10.. bytes that are non-initial characters in a multi-byte sequence.
+        var m = encodeURIComponent(str).match(/%[89ABab]/g);
+        return str.length + (m ? m.length : 0);
     }
 
     async register() {
@@ -70,7 +83,7 @@ export class Form extends Component {
                     addComplete();
                     toast.success('La photo a bien été enregistrée');
                 } catch (e) {
-                    toast.error(e);
+                    console.log(e);
                 }
             } else {
                 try {
@@ -87,7 +100,6 @@ export class Form extends Component {
                     addComplete();
                     toast.success('La photo a bien été enregistrée');
                 } catch (e) {
-                    toast.error(e.text);
                     console.log(e);
                 }
             }
