@@ -15,7 +15,8 @@ export class InputFile extends Component {
     handleChange(e) {
 
         const { getImage } = this.props;
-        if(e.target.files[0]) {
+        const file = e.target.files[0];
+        if(file) {
 
             this.setState({
                 fileName: e.target.value,
@@ -42,7 +43,7 @@ export class InputFile extends Component {
 
         return (
             <label className="input-file" data-name={fileName} htmlFor="file" >
-                <input className="input-file__input" id={id} name={name} onChange={(e) => { this.handleChange(e)}} type="file"/>
+                <input className="input-file__input" accept="image/*" capture="filesystem" id={id} name={name} onChange={(e) => { this.handleChange(e)}} type="file"/>
                 { null !== fileName
                     ? <img alt="une preview de ce qu'il sera présent sur la tuile" className="input-file__preview" src={file} onClick={e => this.removeFile(e)} />
                     : null
