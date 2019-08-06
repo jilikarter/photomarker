@@ -40,7 +40,6 @@ export class Form extends Component {
         let reader = new FileReader();
         reader.onloadend = () => {
 
-                console.log(reader.result);
             if(this.lengthInUtf8Bytes(reader.result) <= 1048487) {
 
                 this.setState({
