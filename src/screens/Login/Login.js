@@ -3,13 +3,16 @@ import { Home } from "../Home/Home";
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {SignIn} from "../SignIn/SignIn";
+import { fbSignIn, fbSignOut } from "../../services/Firebase";
+import {firebase} from "../../firebase";
+
+import moment from "moment/moment";
+import 'moment/locale/fr';
 
 import { VISITOR_ACCESS, ADMIN_ACCESS, ADMIN_LOGIN } from "../../env";
 
 import './Login.css';
-import {SignIn} from "../SignIn/SignIn";
-import { fbSignIn, fbSignOut } from "../../services/Firebase";
-import {firebase} from "../../firebase";
 
 export class Login extends Component {
 
@@ -27,7 +30,8 @@ export class Login extends Component {
             errorSignIn: false,
             currentPassword: '',
             email: '',
-            password: ''
+            password: '',
+            username: null
         };
     }
 
@@ -36,9 +40,14 @@ export class Login extends Component {
 
             if(null !== user) {
 
+                moment.locale();
+                const date = moment(user.metadata.lastSignInTime);
+
                 this.setState({
                     authorized: true,
-                    signIn: true
+                    signIn: true,
+                    username: user.email,
+                    lastConnected: date.format('DD/MM/YYYY [à] HH:MM:SS')
                 });
                 if(user.email === ADMIN_LOGIN) {
                     this.setState({
@@ -90,9 +99,13 @@ export class Login extends Component {
 
                     if(result.user.emailVerified) {
 
+                        moment.locale();
+                        const date = moment(result.user.metadata.lastSignInTime);
                         this.setState({
                             authorized: true,
-                            signIn: true
+                            signIn: true,
+                            username: result.user.email,
+                            lastConnected: date.format('DD/MM/YYYY [à] HH:MM:SS')
                         });
 
                         if(result.user.email === ADMIN_LOGIN) {
@@ -143,7 +156,7 @@ export class Login extends Component {
 
     render() {
 
-        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary } = this.state;
+        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary, username, lastConnected } = this.state;
         return (
             <React.Fragment>
                 {!authorized
@@ -176,12 +189,16 @@ export class Login extends Component {
                     )
                     : (signIn || isAdmin
                         ? <React.Fragment>
-                            <Home isAdmin={isAdmin} />
                             {
                                 !accessTemporary
-                                ? <button className="login__log-out" onClick={(e) => this.signOut()}>Log out</button>
+                                ? <section className="menu">
+                                        <p className="menu__username">{username}</p>
+                                        <p className="menu__last-connected">dernière connexion : {lastConnected}</p>
+                                        <button className="log-out" onClick={() => this.signOut()}>Se déconnecter</button>
+                                    </section>
                                 : null
                             }
+                            <Home isAdmin={isAdmin} />
                         </React.Fragment>
                         : <SignIn />
                     )

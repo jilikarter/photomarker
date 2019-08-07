@@ -88,15 +88,52 @@
     left: auto;
 }
 
-.login__log-out {
-    display: block;
+
+/*
+ * MENU
+ */
+.menu {
     position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 80px;
+    background-color: #3F51B5;
+    box-shadow: 0 5px 10px rgba(50, 50, 50, .75);
+}
+.menu__username {
+    position: relative;
+    margin: 0 80px 0 0;
+    line-height: 60px;
+    text-align: left;
+    transform: translateX(calc(50% - 80px));
+}
+.menu__last-connected {
+    position: absolute;
+    bottom: .5em;
+    left: 50%;
+    max-width: 130px;
+    margin: 0;
+    font-size: .75rem;
+    font-style: italic;
+    text-align: center;
+    line-height: 1em;
+    opacity: .5;
+    transform: translateX(-50%);
+}
+/*
+ * LOG OUT BUTTON
+ */
+.log-out {
+    display: block;
+    position: absolute;
     top: 1rem;
     right: 1rem;
     width: 48px;
     height: 48px;
     font-size: 0;
-    background-color: #3F51B5;
+    background-color: #475ccd;
     background-image: url("../../assets/images/logout.svg");
     background-size: 60%;
     background-position: center center;
@@ -106,6 +143,16 @@
     cursor: pointer;
     transition: transform 400ms ease-out;
 }
-.login__log-out:hover {
+.log-out:hover {
     transform: scaleX(1.1) scaleY(1.1);
+}
+
+.menu + .header {
+    padding-top: 100px;
+}
+
+@media screen and (min-width: 720px) {
+    .menu__last-connected {
+        max-width: none;
+    }
 }
