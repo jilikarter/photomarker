@@ -38,7 +38,7 @@ export const fbEditArticle = async (datas) => {
     return await firestore.collection('articles').doc(datas.id).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
-        'picture': datas.picture,
+        'filename': datas.filename,
         'text': datas.text,
         'disposition': datas.disposition
     });
