@@ -129,7 +129,6 @@ export class Login extends Component {
                         <React.Fragment>
                             <form className="login" onSubmit={(e) => this.handleSignIn(e)}>
                                 <h1 className="login__title">Connectez vous</h1>
-                                <p className="login__explain">Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site</p>
                                 <input className={`login__input${errorSignIn ? ' login__input--error' : ''}`} placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
                                 <input className={`login__input${errorSignIn ? ' login__input--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({password: e.target.value})} value={password} type="password"/>
                                 {
@@ -143,7 +142,7 @@ export class Login extends Component {
                             <form className="login" onSubmit={(e) => this.handleLogin(e)}>
                                 <h1 className="login__title">Enregistrez vous</h1>
                                 <p className="login__explain">Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site</p>
-                                <input className={`login__input${errorRegister ? ' login__input--error' : ''}`} autoFocus={true} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({currentPassword: e.target.value})} value={this.state.currentPassword} type="password"/>
+                                <input className={`login__input${errorRegister ? ' login__input--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({currentPassword: e.target.value})} value={this.state.currentPassword} type="password"/>
                                 {
                                     errorRegister
                                         ? <p className="login__error-message">Le mot de passe saisi n'est pas correct. En cas d'oubli ou perte de mot de passe, veuillez vous rapprochez de la personne qui vous l'a fourni.</p>

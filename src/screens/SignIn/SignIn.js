@@ -70,10 +70,10 @@ export class SignIn extends Component {
         return (
             <React.Fragment>
                 <h1>Je crée mon compte</h1>
-                <form className="login" onSubmit={(e) => this.createAccount(e)}>
-                    <input className={`login__input${errorSignIn ? ' login__input--error' : ''}`} placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
-                    <input className={`login__input${errorSignIn ? ' login__input--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({password: e.target.value})} value={password} type="text"/>
-                    <button className="login__button">Créer</button>
+                <form className="sign-in" onSubmit={(e) => this.createAccount(e)}>
+                    <input className={`sign-in__input${errorSignIn ? ' sign-in__input--error' : ''}`} placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
+                    <input className={`sign-in__input${errorSignIn ? ' sign-in__input--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({password: e.target.value})} value={password} type="text"/>
+                    <button className="sign-in__button">Créer</button>
                 </form>
             </React.Fragment>
         );

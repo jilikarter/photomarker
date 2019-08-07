@@ -57,12 +57,12 @@ export class Reinitialize extends Component {
             <React.Fragment>
                 {
                     redirect
-                        ? <Link to='/' className="login__button">Revenir à l'accueil</Link>
+                        ? <Link to='/' className="reinitialize__button">Revenir à l'accueil</Link>
                         : <React.Fragment>
                             <h1>Réinitialisation du mot de passe</h1>
-                            <form className="login" onSubmit={(e) => this.reinitializePassword(e)}>
-                                <input className="login__input" placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
-                                <button className="login__button">Réinitialiser</button>
+                            <form className="reinitialize" onSubmit={(e) => this.reinitializePassword(e)}>
+                                <input className="reinitialize__input" placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
+                                <button className="reinitialize__button">Réinitialiser</button>
                             </form>
                         </React.Fragment>
                 }
