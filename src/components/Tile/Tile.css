@@ -99,6 +99,20 @@
     animation: tall 2500ms ease-out infinite;
 }
 
+.tile__picture--pending {
+    min-height: 250px;
+    background-color: #f28b74;
+    background-image: url("../../assets/images/picture.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto 30%;
+    animation: picture 5s ease-out infinite;
+    filter: blur(4px);
+}
+.tile__picture--pending img {
+    display: none;
+}
+
 /*
  * TEXT
  */
@@ -196,5 +210,17 @@
     }
     70%, 100% {
         background-size: 100px 100px;
+    }
+}
+
+@keyframes picture {
+    0% {
+        background-size: auto 30%;
+    }
+    50% {
+        background-size: auto 20%;
+    }
+    70%, 100% {
+        background-size: auto 30%;
     }
 }

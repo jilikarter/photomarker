@@ -16,30 +16,18 @@ export class Tile extends Component {
     constructor(props) {
         super(props);
 
-        const { id, city, filename, picture, text, timestamp } = this.props.datas;
-        if(typeof filename !== "undefined") {
-
-            const file = this.getPicture(filename);
-            this.state = {
-                id: id,
-                city: city,
-                filename: filename,
-                text: text,
-                timestamp: timestamp,
-                disposition: 'default',
-                mode: 'read'
-            };
-        } else {
-            this.state = {
-                id: id,
-                city: city,
-                picture: picture,
-                text: text,
-                timestamp: timestamp,
-                disposition: 'default',
-                mode: 'read'
-            };
-        }
+        const { id, city, filename, text, timestamp } = this.props.datas;
+        this.getPicture(filename);
+        this.state = {
+            id: id,
+            city: city,
+            filename: filename,
+            picture: null,
+            text: text,
+            timestamp: timestamp,
+            disposition: 'default',
+            mode: 'read'
+        };
     }
 
     async getPicture(filename) {
@@ -99,6 +87,7 @@ export class Tile extends Component {
         let className = isAdmin ? "tile tile--admin" : "tile";
         className += this.state.mode === 'edition' ? " tile--edition" : "";
 
+        console.log(picture);
         return (
             <React.Fragment>
                 {
@@ -121,7 +110,7 @@ export class Tile extends Component {
                                     ? <div className="tile__geolocalisation">{GeolocalisationIcon}<p>{city}</p></div>
                                     : null
                             }
-                            <figure className="tile__picture">
+                            <figure className={`tile__picture${picture === null ? ' tile__picture--pending' : ''}`}>
                                 <img alt="little think" title="" src={picture} />
                             </figure>
                             {
