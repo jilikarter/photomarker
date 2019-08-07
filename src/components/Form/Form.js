@@ -46,17 +46,7 @@ export class Form extends Component {
             });
             toast.info('La photo à bien été uploadé');
         };
-        // reader.error = () => {
-        //
-        //     toast.error('La photo n\'a pas pu être uploadé');
-        // };
         reader.readAsDataURL(file);
-    }
-
-    lengthInUtf8Bytes(str) {
-        // Matches only the 10.. bytes that are non-initial characters in a multi-byte sequence.
-        var m = encodeURIComponent(str).match(/%[89ABab]/g);
-        return str.length + (m ? m.length : 0);
     }
 
     async register() {
@@ -85,6 +75,7 @@ export class Form extends Component {
                     toast.success('La photo a bien été enregistrée');
                 } catch (e) {
                     console.log(e);
+                    toast.error('La photo n\'a pas été enregistrée, veuillez vous rapprochez du responsable du site. code error : 1');
                 }
             } else {
                 try {
@@ -104,6 +95,7 @@ export class Form extends Component {
                     toast.success('La photo a bien été enregistrée');
                 } catch (e) {
                     console.log(e);
+                    toast.error('La photo n\'a pas été enregistrée, veuillez vous rapprochez du responsable du site. code error : 1');
                 }
             }
         } else {
@@ -162,6 +154,7 @@ export class Form extends Component {
             timestamp: null,
             geolocalisation: false,
             filename: null,
+            picture: null,
             text: '',
             disposition: 'default'
         });
@@ -169,7 +162,7 @@ export class Form extends Component {
 
     render() {
 
-        const { open } = this.state;
+        const { open, picture } = this.state;
 
         return (
             <section className="add-form">
@@ -177,7 +170,7 @@ export class Form extends Component {
                 <label className="add-form__add-button" htmlFor="add-button"></label>
                 <div className="add-form__content">
                     <input className="add-form__content__title" placeholder="titre (obligatoire et sans espaces)" type="text" value={this.state.title} onChange={e => this.setState({ title: e.target.value})} />
-                    <InputFile name="file" id="file" getImage={this.getPicture} />
+                    <InputFile name="file" id="file" picture={picture} getImage={this.getPicture} />
                     <textarea className="add-form__content__text" name="text" id="text" value={this.state.text} onChange={e => this.setState({ text: e.target.value})} placeholder="Ajout du texte ici"></textarea>
                     <p className="add-form__geolocalisation" htmlFor="geolocalisation" onClick={() => this.getGeolocalisation()}>
                         {

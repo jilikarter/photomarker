@@ -54,7 +54,7 @@
     opacity: 0;
     cursor: pointer;
 }
-.input-file[data-name] .input-file__input {display: none}
+.input-file img + .input-file__input {display: none}
 
 .input-file__preview {
     position: relative;

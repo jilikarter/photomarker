@@ -87,7 +87,6 @@ export class Tile extends Component {
         let className = isAdmin ? "tile tile--admin" : "tile";
         className += this.state.mode === 'edition' ? " tile--edition" : "";
 
-        console.log(picture);
         return (
             <React.Fragment>
                 {
