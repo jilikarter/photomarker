@@ -6,7 +6,7 @@ firebase.initializeApp({
     authDomain: AUTH_DOMAIN,
     databaseURL: DATABASE_URL,
     projectId: PROJECT_ID,
-    storageBucket: "",
+    storageBucket: "photomarker-26b3b.appspot.com",
     messagingSenderId: MESSAGING_SENDER_ID,
     appId: APP_ID
 });

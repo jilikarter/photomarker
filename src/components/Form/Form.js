@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {InputFile} from "../InputFIle/InputFile";
-import { addArticle } from "../../services/Firebase";
+import { InputFile } from "../InputFIle/InputFile";
+import { addArticle, addPicture } from "../../services/Firebase";
 import { toast } from 'react-toastify';
 
 import moment from 'moment';
@@ -18,6 +18,7 @@ export class Form extends Component {
         geolocalisation: false,
         city: null,
         picture: null,
+        filename: null,
         text: '',
         disposition: 'default'
     };
@@ -40,16 +41,15 @@ export class Form extends Component {
         let reader = new FileReader();
         reader.onloadend = () => {
 
-            if(this.lengthInUtf8Bytes(reader.result) <= 1048487) {
-
-                this.setState({
-                    picture: reader.result
-                });
-                toast.info('La photo à bien été uploadé');
-            } else {
-                toast.error('La photo est trop volumineuse');
-            }
-        }
+            this.setState({
+                picture: reader.result
+            });
+            toast.info('La photo à bien été uploadé');
+        };
+        // reader.error = () => {
+        //
+        //     toast.error('La photo n\'a pas pu être uploadé');
+        // };
         reader.readAsDataURL(file);
     }
 
@@ -69,11 +69,13 @@ export class Form extends Component {
             if(this.state.geolocalisation) {
 
                 try {
+
+                    await addPicture(this.state.picture, this.state.id + '-' + this.state.title);
                     await addArticle({
                         id: this.state.id,
                         title: this.state.title,
                         timestamp: this.state.timestamp,
-                        picture: this.state.picture,
+                        filename: this.state.id + '-' + this.state.title,
                         text: this.state.text,
                         disposition: this.state.disposition,
                         city: this.state.city
@@ -86,11 +88,13 @@ export class Form extends Component {
                 }
             } else {
                 try {
+
+                    await addPicture(this.state.picture, this.state.id + '-' + this.state.title);
                     await addArticle({
                         id: this.state.id,
                         title: this.state.title,
                         timestamp: this.state.timestamp,
-                        picture: this.state.picture,
+                        filename: this.state.id + '-' + this.state.title,
                         text: this.state.text,
                         disposition: this.state.disposition,
                         city: null
@@ -157,7 +161,7 @@ export class Form extends Component {
             title: '',
             timestamp: null,
             geolocalisation: false,
-            picture: null,
+            filename: null,
             text: '',
             disposition: 'default'
         });

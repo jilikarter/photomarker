@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { GeolocalisationIcon } from '../GeolocalisationIcon/GeolocalisationIcon';
-import {deleteArticle, fbEditArticle } from "../../services/Firebase";
+import {deleteArticle, fbEditArticle, fbgetPicture } from "../../services/Firebase";
 import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import deleteIcon from '../../assets/images/delete.svg';
@@ -16,16 +16,38 @@ export class Tile extends Component {
     constructor(props) {
         super(props);
 
-        const { id, city, picture, text, timestamp } = this.props.datas;
-        this.state = {
-            id: id,
-            city: city,
-            picture: picture,
-            text: text,
-            timestamp: timestamp,
-            disposition: 'default',
-            mode: 'read'
-        };
+        const { id, city, filename, picture, text, timestamp } = this.props.datas;
+        if(typeof filename !== "undefined") {
+
+            const file = this.getPicture(filename);
+            this.state = {
+                id: id,
+                city: city,
+                filename: filename,
+                text: text,
+                timestamp: timestamp,
+                disposition: 'default',
+                mode: 'read'
+            };
+        } else {
+            this.state = {
+                id: id,
+                city: city,
+                picture: picture,
+                text: text,
+                timestamp: timestamp,
+                disposition: 'default',
+                mode: 'read'
+            };
+        }
+    }
+
+    async getPicture(filename) {
+
+        const result = await fbgetPicture(filename);
+        this.setState({
+            picture: result
+        });
     }
 
     updateTimestamp = (timestamp) => {
@@ -42,7 +64,7 @@ export class Tile extends Component {
     }
 
     async saveTile() {
-        const { id, city, picture, text, timestamp, disposition } = this.state;
+        const { id, city, filename, text, timestamp, disposition } = this.state;
         const { update } = this.props;
         this.setState({
             mode: 'read'
@@ -50,7 +72,7 @@ export class Tile extends Component {
         await fbEditArticle({
             id: id,
             city: city,
-            picture: picture,
+            filename: filename,
             text: text,
             timestamp: timestamp,
             disposition: disposition

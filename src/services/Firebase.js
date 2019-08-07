@@ -1,4 +1,4 @@
-import { firestore } from "../firebase";
+import { firebase, firestore } from "../firebase";
 
 
 export const addArticle = (datas) => new Promise((resolve, reject) => {
@@ -6,22 +6,32 @@ export const addArticle = (datas) => new Promise((resolve, reject) => {
     firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
-        'picture': datas.picture,
+        'filename': datas.filename,
         'text': datas.text,
         'disposition': datas.disposition
     }).then(() => resolve(true)).catch((error) => reject(error));
 });
 
-// export const addArticle = async (datas) => {
-//
-//     return await firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
-//         'timestamp': datas.timestamp,
-//         'city': datas.city,
-//         'picture': datas.picture,
-//         'text': datas.text,
-//         'disposition': datas.disposition
-//     });
-// };
+export const addPicture = (file, filename) => new Promise((resolve, reject) => {
+
+    let storageRef = firebase.storage().ref(filename);
+    storageRef.putString(file, 'data_url').then(() => resolve(true)).catch((error) => reject(error));
+});
+
+export const fbgetPicture = (filename) => new Promise((resolve, reject) => {
+
+    // firebase.storage().ref().child(filename).getDownloadURL().then((snapshot) => {
+    //     resolve(true);
+    // }).catch((error) => reject(error));
+
+    const image = firebase.storage().ref().child(filename);
+    const urlPromise = image.getDownloadURL();
+    let result;
+    urlPromise.then((url) => {
+        result = url;
+        resolve(url);
+    }).catch((error) => reject(error));
+});
 
 export const fbEditArticle = async (datas) => {
 
