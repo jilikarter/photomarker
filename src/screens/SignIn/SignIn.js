@@ -73,6 +73,7 @@ export class SignIn extends Component {
                 <form className="sign-in" onSubmit={(e) => this.createAccount(e)}>
                     <input className={`sign-in__input${errorSignIn ? ' sign-in__input--error' : ''}`} placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
                     <input className={`sign-in__input${errorSignIn ? ' sign-in__input--error' : ''}`} placeholder="mot de passe (password)" name="password" onChange={(e) => this.setState({password: e.target.value})} value={password} type="text"/>
+                    <p className="sign-in__explain">Après la création du compte, un mail vous sera envoyé pour confirmer votre email. Pensez à cliquer sur le lien.</p>
                     <button className="sign-in__button">Créer</button>
                 </form>
             </React.Fragment>

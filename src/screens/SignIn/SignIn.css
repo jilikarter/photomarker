@@ -10,8 +10,10 @@
     font-size: 3rem;
 }
 .sign-in__explain {
+    max-width: 400px;
     font-size: .9rem;
     font-style: italic;
+    opacity: .5;
 }
 .sign-in__input {
     min-width: 200px;
