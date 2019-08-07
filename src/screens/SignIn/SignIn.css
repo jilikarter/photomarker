@@ -15,6 +15,7 @@
 }
 .sign-in__input {
     min-width: 200px;
+    margin: .5em;
     padding: .5rem 1rem;
     text-align: center;
     border: none;

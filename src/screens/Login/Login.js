@@ -87,22 +87,44 @@ export class Login extends Component {
 
                 const result = await fbSignIn(email, password);
                 if(typeof result !== 'undefined') {
-                    this.setState({
-                        authorized: true,
-                        signIn: true
-                    });
 
-                    if(result.user.email === ADMIN_LOGIN) {
+                    if(result.user.emailVerified) {
+
                         this.setState({
-                            isAdmin: true
+                            authorized: true,
+                            signIn: true
                         });
+
+                        if(result.user.email === ADMIN_LOGIN) {
+                            this.setState({
+                                isAdmin: true
+                            });
+                        }
+                    } else {
+                        this.setState({
+                            authorized: false,
+                            signIn: false
+                        });
+                        toast.warn('Veuillez confirmer votre email via le mail de confirmation qui vous a été envoyer');
+                        fbSignOut();
                     }
                 }
             } catch (e) {
+                console.log(e);
+                switch (e.code) {
+                    case 'auth/user-not-found':
+                        toast.error('Il n\'y a aucun compte avec cet email');
+                        break;
+                    case 'auth/wrong-password':
+                        toast.error('Le mot de passe ou l\'email ne correspondent pas');
+                        break;
+                    default:
+                        toast.error('Une erreur est survenue lors de la tentative de connection, veuillez réessayer plus tard : code erreur 5');
+
+                }
                 this.setState({
                     errorSignIn: true
                 });
-                toast.error('L\'email et/ou le password sont incorrects');
             }
         } else {
             toast.warn('Les champs doivent être remplis');

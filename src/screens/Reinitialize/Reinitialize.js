@@ -63,6 +63,7 @@ export class Reinitialize extends Component {
                             <form className="reinitialize" onSubmit={(e) => this.reinitializePassword(e)}>
                                 <input className="reinitialize__input" placeholder="email" name="email" onChange={(e) => this.setState({email: e.target.value})} value={email} type="email"/>
                                 <button className="reinitialize__button">Réinitialiser</button>
+                                <Link to='/' className="reinitialize__button">Retour</Link>
                             </form>
                         </React.Fragment>
                 }
