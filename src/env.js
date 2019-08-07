@@ -5,7 +5,9 @@ export const PROJECT_ID=process.env.REACT_APP_PROJECT_ID
 export const MESSAGING_SENDER_ID=process.env.REACT_APP_MESSAGING_SENDER_ID
 export const APP_ID=process.env.REACT_APP_APP_ID
 export const STORAGE_BUCKET=process.env.REACT_APP_STORAGE_BUCKET
+export const ADMIN_LOGIN=process.env.REACT_APP_ADMIN_LOGIN
 export const ADMIN_ACCESS=process.env.REACT_APP_ADMIN_ACCESS
+export const VISITOR_LOGIN=process.env.REACT_APP_VISITOR_LOGIN
 export const VISITOR_ACCESS=process.env.REACT_APP_VISITOR_ACCESS
 
 export const COLLECTION_NAME=process.env.REACT_APP_COLLECTION_NAME
