@@ -23,9 +23,7 @@ export const fbgetPicture = (filename) => new Promise((resolve, reject) => {
 
     const image = firebase.storage().ref().child(filename);
     const urlPromise = image.getDownloadURL();
-    let result;
     urlPromise.then((url) => {
-        result = url;
         resolve(url);
     }).catch((error) => reject(error));
 });
@@ -45,6 +43,20 @@ export const deleteArticle = async (id) => {
 
     return await firestore.collection(COLLECTION_NAME).doc(id).delete();
 };
+
+// export const fbdeletePicture = async (id) => {
+//
+//     return await firebase.storage().ref().child(id).delete();
+// };
+
+export const fbdeletePicture = (filename) => new Promise((resolve, reject) => {
+
+    const image = firebase.storage().ref().child(filename);
+    const urlPromise = image.delete();
+    urlPromise.then((url) => {
+        resolve(url);
+    }).catch((error) => reject(error));
+});
 
 export const getAllArticles = async () => {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { GeolocalisationIcon } from '../GeolocalisationIcon/GeolocalisationIcon';
-import {deleteArticle, fbEditArticle, fbgetPicture } from "../../services/Firebase";
+import {deleteArticle, fbEditArticle, fbgetPicture, fbdeletePicture } from "../../services/Firebase";
 import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import deleteIcon from '../../assets/images/delete.svg';
@@ -74,6 +74,7 @@ export class Tile extends Component {
         let response = window.confirm('etes vous sur de vouloir supprimer ?');
         if(response) {
 
+            await fbdeletePicture(datas.filename);
             await deleteArticle(datas.id);
             update(true);
             toast.info('La photo a bien été supprimée');
