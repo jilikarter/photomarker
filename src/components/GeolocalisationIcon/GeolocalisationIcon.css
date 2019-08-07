@@ -10,6 +10,7 @@
     background-color: #76b7eb;
     transform: rotateZ(21deg);
     transform-style: preserve-3d;
+    overflow: hidden;
 }
 .geolocalisation__mappemonde {
     position: relative;
