@@ -1,5 +1,6 @@
 import { firebase, firestore } from "../firebase";
 import { COLLECTION_NAME } from "../env";
+import { toast } from 'react-toastify';
 
 
 export const addArticle = (datas) => new Promise((resolve, reject) => {
@@ -43,11 +44,6 @@ export const deleteArticle = async (id) => {
 
     return await firestore.collection(COLLECTION_NAME).doc(id).delete();
 };
-
-// export const fbdeletePicture = async (id) => {
-//
-//     return await firebase.storage().ref().child(id).delete();
-// };
 
 export const fbdeletePicture = (filename) => new Promise((resolve, reject) => {
 
@@ -102,3 +98,32 @@ export const fbEditBirth = (datas) => {
         'weight': datas.weight
     });
 };
+
+
+/*
+ * Authentification
+ */
+export const fbSignIn = (email, password) => {
+
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+};
+
+export const fbSignOut = () => {
+
+    return firebase.auth().signOut();
+};
+
+export const fbCreateAccount = (email, password) => {
+
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+};
+
+export const fbVerifyMail = () => {
+
+    return firebase.auth().currentUser.sendEmailVerification();
+};
+
+export const fbReinitializePassword = (email) => {
+
+    return firebase.auth().sendPasswordResetEmail(email);
+}
