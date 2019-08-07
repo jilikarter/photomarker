@@ -1,9 +1,10 @@
 import { firebase, firestore } from "../firebase";
+import { COLLECTION_NAME } from "../env";
 
 
 export const addArticle = (datas) => new Promise((resolve, reject) => {
 
-    firestore.collection('articles').doc(datas.id + '-' + datas.title).set({
+    firestore.collection(COLLECTION_NAME).doc(datas.id + '-' + datas.title).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
         'filename': datas.filename,
@@ -20,10 +21,6 @@ export const addPicture = (file, filename) => new Promise((resolve, reject) => {
 
 export const fbgetPicture = (filename) => new Promise((resolve, reject) => {
 
-    // firebase.storage().ref().child(filename).getDownloadURL().then((snapshot) => {
-    //     resolve(true);
-    // }).catch((error) => reject(error));
-
     const image = firebase.storage().ref().child(filename);
     const urlPromise = image.getDownloadURL();
     let result;
@@ -35,7 +32,7 @@ export const fbgetPicture = (filename) => new Promise((resolve, reject) => {
 
 export const fbEditArticle = async (datas) => {
 
-    return await firestore.collection('articles').doc(datas.id).set({
+    return await firestore.collection(COLLECTION_NAME).doc(datas.id).set({
         'timestamp': datas.timestamp,
         'city': datas.city,
         'filename': datas.filename,
@@ -46,13 +43,13 @@ export const fbEditArticle = async (datas) => {
 
 export const deleteArticle = async (id) => {
 
-    return await firestore.collection('articles').doc(id).delete();
+    return await firestore.collection(COLLECTION_NAME).doc(id).delete();
 };
 
 export const getAllArticles = async () => {
 
     const result = [];
-    let query = firestore.collection('articles').orderBy("timestamp", "desc"); // .orderBy("timestamp, desc")
+    let query = firestore.collection(COLLECTION_NAME).orderBy("timestamp", "desc"); // .orderBy("timestamp, desc")
     await query.get()
         .then(snapshot => {
             snapshot.forEach(doc => {
