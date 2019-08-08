@@ -192,7 +192,7 @@ export class Login extends Component {
                         : <SignIn />
                     )
                 }
-                <ToastContainer className={'toto'} autoClose={false} />
+                <ToastContainer />
             </React.Fragment>
         );
     }
