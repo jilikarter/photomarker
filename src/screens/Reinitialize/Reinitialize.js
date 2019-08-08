@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {fbReinitializePassword} from "../../services/Firebase";
 import { ToastContainer, toast } from 'react-toastify';
 

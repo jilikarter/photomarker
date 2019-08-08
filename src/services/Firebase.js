@@ -126,4 +126,4 @@ export const fbVerifyMail = () => {
 export const fbReinitializePassword = (email) => {
 
     return firebase.auth().sendPasswordResetEmail(email);
-}
+};

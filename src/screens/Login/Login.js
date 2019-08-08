@@ -144,7 +144,7 @@ export class Login extends Component {
         }
     }
 
-    signOut() {
+    signOut = () => {
         this.setState({
             authorized: false,
             signIn: false
@@ -156,7 +156,7 @@ export class Login extends Component {
 
     render() {
 
-        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary, username, lastConnected } = this.state;
+        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary } = this.state;
         return (
             <React.Fragment>
                 {!authorized
@@ -188,22 +188,11 @@ export class Login extends Component {
                         </React.Fragment>
                     )
                     : (signIn || isAdmin
-                        ? <React.Fragment>
-                            {
-                                !accessTemporary
-                                ? <section className="menu">
-                                        <p className="menu__username">{username}</p>
-                                        <p className="menu__last-connected">dernière connexion : {lastConnected}</p>
-                                        <button className="log-out" onClick={() => this.signOut()}>Se déconnecter</button>
-                                    </section>
-                                : null
-                            }
-                            <Home isAdmin={isAdmin} />
-                        </React.Fragment>
+                        ? <Home isAdmin={isAdmin} accessTemporary={accessTemporary} signOut={this.signOut} />
                         : <SignIn />
                     )
                 }
-                <ToastContainer />
+                <ToastContainer className={'toto'} autoClose={false} />
             </React.Fragment>
         );
     }
