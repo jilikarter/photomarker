@@ -97,11 +97,14 @@ export class Birth extends Component {
                                 <p className="birth__weight">{weight}<span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size">{size}<span className="birth__weight__unit">cm</span></p>
                                 {
-                                    !text
-                                        ? null
-                                        : lang === 'fr-FR'
-                                            ? <p className="birth__text">{text}</p>
-                                            : <p className="birth__text">{textEn}</p>
+                                    lang === 'fr-FR' && text
+                                        ? <p className="birth__text">{text}</p>
+                                        : null
+                                }
+                                {
+                                    lang === 'en-EN' && textEn
+                                        ? <p className="birth__text">{textEn}</p>
+                                        : null
                                 }
                                 {
                                     isAdmin

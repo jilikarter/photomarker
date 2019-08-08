@@ -60,6 +60,7 @@ export class Tile extends Component {
         this.setState({
             mode: 'read'
         });
+        console.log(text, textEn);
         await fbEditArticle({
             id: id,
             city: city,
@@ -118,11 +119,14 @@ export class Tile extends Component {
                                 <img alt="little think" title="" src={picture} />
                             </figure>
                             {
-                                !text
-                                    ? null
-                                    : lang === 'fr-FR'
-                                        ? <p className="tile__text">{text}</p>
-                                        : <p className="tile__text">{textEn}</p>
+                                lang === 'fr-FR' && text
+                                    ? <p className="tile__text">{text}</p>
+                                    : null
+                            }
+                            {
+                                lang === 'en-EN' && textEn
+                                    ? <p className="tile__text">{textEn}</p>
+                                    : null
                             }
                             {
                                 isAdmin
