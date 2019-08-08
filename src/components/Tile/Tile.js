@@ -6,10 +6,10 @@ import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import deleteIcon from '../../assets/images/delete.svg';
 import { toast } from 'react-toastify';
-
+import {Time} from "../Time/Time";
+import {Trad} from "../Trad/Trad";
 
 import './Tile.css';
-import {Time} from "../Time/Time";
 
 export class Tile extends Component {
 
@@ -55,8 +55,9 @@ export class Tile extends Component {
     }
 
     async saveTile() {
+
         const { id, city, filename, text, textEn, timestamp, disposition } = this.state;
-        const { update } = this.props;
+        const { update, lang } = this.props;
         this.setState({
             mode: 'read'
         });
@@ -71,18 +72,19 @@ export class Tile extends Component {
             disposition: disposition
         });
         update(true);
-        toast.success('La photo a bien été mise à jour');
+        toast.success(<Trad lang={lang} code={'tile.toast.save.success'}/>);
     }
 
     async deleteTile() {
-        const { datas, update } = this.props;
+
+        const { datas, update, lang } = this.props;
         let response = window.confirm('etes vous sur de vouloir supprimer ?');
         if(response) {
 
             await fbdeletePicture(datas.filename);
             await deleteArticle(datas.id);
             update(true);
-            toast.success('La photo a bien été supprimée');
+            toast.success(<Trad lang={lang} code={'tile.toast.delete.success'}/>);
         }
     }
 

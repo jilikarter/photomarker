@@ -6,6 +6,7 @@ import moment from "moment/moment";
 import 'moment/locale/fr';
 
 import './Menu.css';
+import {Trad} from "../Trad/Trad";
 
 export class Menu extends Component {
 
@@ -50,15 +51,15 @@ export class Menu extends Component {
     render() {
 
         const { username, lastConnected, paramsActive } = this.state;
-        const { signOut } = this.props;
+        const { signOut, lang } = this.props;
         return (
             <nav className="menu">
                 <p className="menu__username">{username}</p>
-                <p className="menu__last-connected">dernière connexion : {lastConnected}</p>
+                <p className="menu__last-connected"><Trad lang={lang} code={'menu.lastConnected'}/> : {lastConnected}</p>
                 <button className={`menu__params-button${paramsActive ? ' menu__params-button--active': ''}`} onClick={() => this.setState({paramsActive: !paramsActive})} onBlur={() => this.closeParams()}>Paramètres</button>
                 <section className="menu__params-container">
-                    <Link className="menu__params-container__item" to='/edit-profile' >Mon profil</Link>
-                    <button className="menu__params-container__item" onClick={() => signOut()}>Se déconnecter</button>
+                    <Link className="menu__params-container__item" to='/edit-profile' ><Trad lang={lang} code={'menu.profile'}/></Link>
+                    <button className="menu__params-container__item" onClick={() => signOut()}><Trad lang={lang} code={'menu.signOut'}/></button>
                 </section>
             </nav>
         );

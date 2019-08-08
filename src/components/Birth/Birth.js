@@ -5,10 +5,11 @@ import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import {GeolocalisationIcon} from "../GeolocalisationIcon/GeolocalisationIcon";
 import {Time} from "../Time/Time";
-
-import './Birth.css';
+import {Trad} from "../Trad/Trad";
 import { fbEditBirth } from "../../services/Firebase";
 import { toast } from 'react-toastify';
+
+import './Birth.css';
 
 export class Birth extends Component {
 
@@ -47,6 +48,7 @@ export class Birth extends Component {
         this.setState({
             mode: 'read'
         });
+        const { lang } = this.props;
         const { city, name, weight, size, text, textEn, timestamp } = this.state;
         fbEditBirth({
             'city': city,
@@ -58,7 +60,7 @@ export class Birth extends Component {
             'timestamp': timestamp,
             'weight': weight
         });
-        toast.success('Les données ont bien été mise à jour');
+        toast.success(<Trad lang={lang} code={'birth.toast.save.success'}/>);
     }
 
     render() {
@@ -93,7 +95,7 @@ export class Birth extends Component {
                             <div className="birth__content">
                                 <Time lang={lang} time={timestamp} />
                                 <p className="birth__geolocalisation">{GeolocalisationIcon}{city}</p>
-                                <p className="birth__name">Je m'appelle {name}</p>
+                                <p className="birth__name"><Trad lang={lang} code={'birth.name'}/> {name}</p>
                                 <p className="birth__weight">{weight}<span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size">{size}<span className="birth__weight__unit">cm</span></p>
                                 {

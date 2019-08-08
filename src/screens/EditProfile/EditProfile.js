@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {firebase} from "../../firebase";
 import { ToastContainer, toast } from 'react-toastify';
+import {Lang} from "../../components/Lang/Lang";
+import moment from "moment/moment";
+import {Trad} from "../../components/Trad/Trad";
 
 import 'react-toastify/dist/ReactToastify.css';
 import './EditProfile.css';
-import moment from "moment/moment";
 
 export class EditProfile extends Component {
 
@@ -23,6 +25,7 @@ export class EditProfile extends Component {
 
     save() {
 
+        const { lang } = this.props;
         const { name, language } = this.state;
         const user = firebase.auth().currentUser;
         user.languageCode = language;
@@ -30,9 +33,9 @@ export class EditProfile extends Component {
             displayName: name,
             language: language
         }).then(function() {
-            toast.success('Votre profil a bien été mis à jour');
+            toast.success(<Trad lang={lang} code={'editProfile.toast.success'}/>);
         }).catch(function(error) {
-            toast.error('Une erreur est survenue lors de l\'enregistrement, veuillez contacter le responsable du site : code erreur 6');
+            toast.error(<Trad lang={lang} code={'editProfile.toast.error'}/>);
         });
     }
 
@@ -58,22 +61,30 @@ export class EditProfile extends Component {
         });
     }
 
+    changeLanguage = (lang) => {
+
+        const { changeLanguage } = this.props;
+        changeLanguage(lang);
+    };
+
     render() {
 
+        const { lang } = this.props;
         const { user, name } = this.state;
         return (
             <React.Fragment>
                 {
                     user
                     ?   <section className="edit">
-                            <h1 className="edit__title">Edition du profil</h1>
+                            <h1 className="edit__title"><Trad lang={lang} code={'editProfile.title'}/></h1>
                             <input className="edit__input" type="text" value={name} onChange={(e) => this.setState({name: e.target.value})} placeholder="Votre pseudo" />
-                            <button className="edit__button" onClick={() => this.save()}>Sauvegarder</button>
-                            <Link className="edit__button" to={'/'}>Retour</Link>
+                            <button className="edit__button" onClick={() => this.save()}><Trad lang={lang} code={'editProfile.submit'}/></button>
+                            <Link className="edit__button" to={'/'}><Trad lang={lang} code={'editProfile.return'}/></Link>
                             <ToastContainer />
                         </section>
                     : null
                 }
+                <Lang lang={lang} changeLanguage={this.changeLanguage} />
             </React.Fragment>
         );
     }

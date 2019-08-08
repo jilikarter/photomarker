@@ -43,7 +43,7 @@
     font-style: italic;
     color: #E91E63;
 }
-.login__error-message a {
+.login__error-message + a {
     color: #ECEFF1;
 }
 .login__button {
