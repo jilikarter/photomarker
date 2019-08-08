@@ -34,7 +34,7 @@ export class Menu extends Component {
                 this.setState({
                     user: user,
                     username: username,
-                    lastConnected: date.format('DD/MM/YYYY [à] HH:MM:SS')
+                    lastConnected: date.format('DD/MM/YYYY [à] HH:mm:ss')
                 });
             }
         });

@@ -123,7 +123,7 @@ export class Login extends Component {
                     }
                 }
             } catch (e) {
-                console.log(e);
+
                 switch (e.code) {
                     case 'auth/user-not-found':
                         toast.error('Il n\'y a aucun compte avec cet email');
