@@ -20,6 +20,7 @@ export class Form extends Component {
         picture: null,
         filename: null,
         text: '',
+        textEn: '',
         disposition: 'default'
     };
 
@@ -67,6 +68,7 @@ export class Form extends Component {
                         timestamp: this.state.timestamp,
                         filename: this.state.id + '-' + this.state.title,
                         text: this.state.text,
+                        textEn: this.state.textEn,
                         disposition: this.state.disposition,
                         city: this.state.city
                     });
@@ -87,6 +89,7 @@ export class Form extends Component {
                         timestamp: this.state.timestamp,
                         filename: this.state.id + '-' + this.state.title,
                         text: this.state.text,
+                        textEn: this.state.textEn,
                         disposition: this.state.disposition,
                         city: null
                     });
@@ -156,31 +159,33 @@ export class Form extends Component {
             filename: null,
             picture: null,
             text: '',
+            textEn: '',
             disposition: 'default'
         });
     }
 
     render() {
 
-        const { open, picture } = this.state;
+        const { open, picture, title, text, textEn, geolocalisation, city } = this.state;
 
         return (
             <section className="add-form">
                 <input type="checkbox" id="add-button" checked={open} onChange={(e) => this.setState({open: e.target.checked})} />
                 <label className="add-form__add-button" htmlFor="add-button"></label>
                 <div className="add-form__content">
-                    <input className="add-form__content__title" placeholder="titre (obligatoire et sans espaces)" type="text" value={this.state.title} onChange={e => this.setState({ title: e.target.value})} />
+                    <input className="add-form__content__title" placeholder="titre (obligatoire et sans espaces)" type="text" value={title} onChange={e => this.setState({ title: e.target.value})} />
                     <InputFile name="file" id="file" picture={picture} getImage={this.getPicture} />
-                    <textarea className="add-form__content__text" name="text" id="text" value={this.state.text} onChange={e => this.setState({ text: e.target.value})} placeholder="Ajout du texte ici"></textarea>
+                    <textarea className="add-form__content__text" name="text" id="text" value={text} onChange={e => this.setState({ text: e.target.value})} placeholder="Ajout du texte ici (en francais)"></textarea>
+                    <textarea className="add-form__content__text" name="textEn" id="textEn" value={textEn} onChange={e => this.setState({ textEn: e.target.value})} placeholder="Ajout du texte ici (en Anglais)"></textarea>
                     <p className="add-form__geolocalisation" htmlFor="geolocalisation" onClick={() => this.getGeolocalisation()}>
                         {
-                            (this.state.city === null || !this.state.geolocalisation)
+                            (city === null || !geolocalisation)
                             ? 'Geolocalisation'
-                            : this.state.city
+                            : city
                         }
                     </p>
                     <button className="add-form__content__reset">Réinitialiser</button>
-                    <button className="add-form__content__add" onClick={e => this.register()}>Ajouter</button>
+                    <button className="add-form__content__add" onClick={() => this.register()}>Ajouter</button>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                     <defs>

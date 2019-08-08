@@ -10,9 +10,9 @@ export class Time extends Component {
     constructor(props) {
         super(props);
 
-        const { time } = this.props;
+        const { lang, time } = this.props;
 
-        moment.locale();
+        moment.locale(lang);
         const date = moment(time);
         this.state = {
             date: date

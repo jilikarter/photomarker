@@ -14,7 +14,7 @@ export class Home extends Component {
     }
 
     render() {
-        const { isAdmin, accessTemporary, signOut } = this.props;
+        const { lang, isAdmin, accessTemporary, signOut } = this.props;
         return (
             <React.Fragment>
                 {
@@ -26,7 +26,7 @@ export class Home extends Component {
                     <h1>Mon premier album</h1>
                 </header>
                 <main className="main">
-                    <List isAdmin={isAdmin} />
+                    <List lang={lang} isAdmin={isAdmin} />
                 </main>
             </React.Fragment>
         );

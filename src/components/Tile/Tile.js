@@ -16,14 +16,17 @@ export class Tile extends Component {
     constructor(props) {
         super(props);
 
-        const { id, city, filename, text, timestamp } = this.props.datas;
+        const { lang } = this.props;
+        const { id, city, filename, text, textEn, timestamp } = this.props.datas;
         this.getPicture(filename);
         this.state = {
+            lang: lang,
             id: id,
             city: city,
             filename: filename,
             picture: null,
             text: text,
+            textEn: textEn,
             timestamp: timestamp,
             disposition: 'default',
             mode: 'read'
@@ -52,7 +55,7 @@ export class Tile extends Component {
     }
 
     async saveTile() {
-        const { id, city, filename, text, timestamp, disposition } = this.state;
+        const { id, city, filename, text, textEn, timestamp, disposition } = this.state;
         const { update } = this.props;
         this.setState({
             mode: 'read'
@@ -62,6 +65,7 @@ export class Tile extends Component {
             city: city,
             filename: filename,
             text: text,
+            textEn: textEn,
             timestamp: timestamp,
             disposition: disposition
         });
@@ -83,11 +87,10 @@ export class Tile extends Component {
 
     render() {
         const { isAdmin } = this.props;
-        const { city, picture, text, timestamp } = this.state;
+        const { lang, city, picture, text, textEn, timestamp } = this.state;
 
         let className = isAdmin ? "tile tile--admin" : "tile";
         className += this.state.mode === 'edition' ? " tile--edition" : "";
-
         return (
             <React.Fragment>
                 {
@@ -98,13 +101,14 @@ export class Tile extends Component {
                             <figure className="tile__picture">
                                 <img alt="little think" title="" src={picture} />
                             </figure>
-                            <p className="tile__text"><textarea placeholder="petite phrase en surplus (facultative)" type="text" value={text} onChange={e => this.setState({ text: e.target.value})} /></p>
+                            <p className="tile__text"><textarea placeholder="[FR] petite phrase en surplus (facultative)" type="text" value={text} onChange={e => this.setState({ text: e.target.value})} /></p>
+                            <p className="tile__text"><textarea placeholder="[EN] little extra sentence (optional)" type="text" value={textEn} onChange={e => this.setState({ textEn: e.target.value})} /></p>
                             <div className="tile__manage">
                                 <button onClick={(e) => this.saveTile(e)}><img src={saveIcon} /></button>
                             </div>
                         </article>
                         : <article className={className}>
-                            <Time time={timestamp}/>
+                            <Time lang={lang} time={timestamp}/>
                             {
                                 city
                                     ? <div className="tile__geolocalisation">{GeolocalisationIcon}<p>{city}</p></div>
@@ -114,9 +118,11 @@ export class Tile extends Component {
                                 <img alt="little think" title="" src={picture} />
                             </figure>
                             {
-                                text
-                                    ? <p className="tile__text">{text}</p>
-                                    : null
+                                !text
+                                    ? null
+                                    : lang === 'fr-FR'
+                                        ? <p className="tile__text">{text}</p>
+                                        : <p className="tile__text">{textEn}</p>
                             }
                             {
                                 isAdmin

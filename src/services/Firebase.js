@@ -1,7 +1,5 @@
 import { firebase, firestore } from "../firebase";
 import { COLLECTION_NAME } from "../env";
-import { toast } from 'react-toastify';
-
 
 export const addArticle = (datas) => new Promise((resolve, reject) => {
 
@@ -10,6 +8,7 @@ export const addArticle = (datas) => new Promise((resolve, reject) => {
         'city': datas.city,
         'filename': datas.filename,
         'text': datas.text,
+        'textEn': datas.textEn,
         'disposition': datas.disposition
     }).then(() => resolve(true)).catch((error) => reject(error));
 });
@@ -36,6 +35,7 @@ export const fbEditArticle = async (datas) => {
         'city': datas.city,
         'filename': datas.filename,
         'text': datas.text,
+        'textEn': datas.textEn,
         'disposition': datas.disposition
     });
 };
@@ -94,6 +94,7 @@ export const fbEditBirth = (datas) => {
         'name': datas.name,
         'size': datas.size,
         'text': datas.text,
+        'textEn': datas.textEn,
         'timestamp': datas.timestamp,
         'weight': datas.weight
     });

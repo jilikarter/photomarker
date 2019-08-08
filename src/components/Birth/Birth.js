@@ -15,13 +15,16 @@ export class Birth extends Component {
     constructor(props) {
         super(props);
 
-        const { city, name, weight, size, text, timestamp } = this.props.datas;
+        const { lang } = this.props;
+        const { city, name, weight, size, text, textEn, timestamp } = this.props.datas;
         this.state = {
+            lang: lang,
             city: city,
             name: name,
             size: size,
             weight: weight,
             text: text,
+            textEn: textEn,
             timestamp: timestamp,
             mode: 'read'
         };
@@ -44,12 +47,14 @@ export class Birth extends Component {
         this.setState({
             mode: 'read'
         });
-        const { city, name, weight, size, text, timestamp } = this.state;
+        const { city, name, weight, size, text, textEn, timestamp } = this.state;
         fbEditBirth({
             'city': city,
             'name': name,
             'size': size,
             'text': text,
+            'textEn': textEn,
+            'textEn': textEn,
             'timestamp': timestamp,
             'weight': weight
         });
@@ -58,9 +63,8 @@ export class Birth extends Component {
 
     render() {
 
-        const { isAdmin } = this.props;
-        const { city, name, weight, size, text, timestamp } = this.state;
-
+        const { lang, isAdmin } = this.props;
+        const { city, name, weight, size, text, textEn, timestamp } = this.state;
         return (
             <React.Fragment>
                 {
@@ -73,7 +77,8 @@ export class Birth extends Component {
                                 <p className="birth__name">Je m'appelle <input placeholder="Prénom(s)" type="text" value={name} onChange={e => this.setState({ name: e.target.value})} /></p>
                                 <p className="birth__weight"><input type="text" value={weight} onChange={e => this.setState({ weight: e.target.value})} /><span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size"><input type="text" value={size} onChange={e => this.setState({ size: e.target.value})} /><span className="birth__weight__unit">cm</span></p>
-                                <p className="birth__text"><textarea placeholder="petite phrase en surplus (facultative)" type="text" value={text} onChange={e => this.setState({ text: e.target.value})} /></p>
+                                <p className="birth__text"><textarea placeholder="[FR] petite phrase en surplus (facultative)" type="text" value={text} onChange={e => this.setState({ text: e.target.value})} /></p>
+                                <p className="birth__text"><textarea placeholder="[EN] little extra sentence (optional)" type="text" value={textEn} onChange={e => this.setState({ textEn: e.target.value})} /></p>
                                 {
                                     isAdmin
                                         ?   <div className="birth__manage">
@@ -86,15 +91,17 @@ export class Birth extends Component {
                         : <article className="birth">
                             <img className="birth__icon" src={birthIcon} alt="Icon of baby. His clothes are blue because it's a boy" />
                             <div className="birth__content">
-                                <Time time={timestamp}/>
+                                <Time lang={lang} time={timestamp} />
                                 <p className="birth__geolocalisation">{GeolocalisationIcon}{city}</p>
                                 <p className="birth__name">Je m'appelle {name}</p>
                                 <p className="birth__weight">{weight}<span className="birth__weight__unit">kg</span></p>
                                 <p className="birth__size">{size}<span className="birth__weight__unit">cm</span></p>
                                 {
-                                    text
-                                        ? <p className="birth__text">{text}</p>
-                                        : null
+                                    !text
+                                        ? null
+                                        : lang === 'fr-FR'
+                                            ? <p className="birth__text">{text}</p>
+                                            : <p className="birth__text">{textEn}</p>
                                 }
                                 {
                                     isAdmin

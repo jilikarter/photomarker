@@ -45,7 +45,7 @@ export class List extends Component {
 
     render() {
 
-        const { isAdmin } = this.props;
+        const { lang, isAdmin } = this.props;
         const { articles, birth, shadowTile } = this.state;
         return (
             <React.Fragment>
@@ -53,13 +53,13 @@ export class List extends Component {
                     {
                         articles.length !== 0
                         ? articles.map( item  => (
-                                <Tile datas={item} isAdmin={isAdmin} key={Math.random() * 100} update={this.fetchAll} />
+                                <Tile lang={lang} datas={item} isAdmin={isAdmin} key={Math.random() * 100} update={this.fetchAll} />
                             ))
                         : shadowTile ? <TileShadow /> : null
                     }
                     {
                         birth
-                            ? <Birth datas={birth} isAdmin={isAdmin} />
+                            ? <Birth lang={lang} datas={birth} isAdmin={isAdmin} />
                             : <BirthShadow />
                     }
                 </section>

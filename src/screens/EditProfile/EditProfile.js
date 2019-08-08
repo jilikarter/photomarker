@@ -14,6 +14,7 @@ export class EditProfile extends Component {
 
         this.state = {
             user: null,
+            language: 'fr',
             name: '',
             email: null,
             lastConnected: null
@@ -22,10 +23,12 @@ export class EditProfile extends Component {
 
     save() {
 
-        const { name } = this.state;
+        const { name, language } = this.state;
         const user = firebase.auth().currentUser;
+        user.languageCode = language;
         user.updateProfile({
-            displayName: name
+            displayName: name,
+            language: language
         }).then(function() {
             toast.success('Votre profil a bien été mis à jour');
         }).catch(function(error) {

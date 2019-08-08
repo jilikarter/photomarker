@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {SignIn} from "../SignIn/SignIn";
 import { fbSignIn, fbSignOut } from "../../services/Firebase";
 import {firebase} from "../../firebase";
+import {Lang} from "../../components/Lang/Lang";
 
 import moment from "moment/moment";
 import 'moment/locale/fr';
@@ -31,7 +32,8 @@ export class Login extends Component {
             currentPassword: '',
             email: '',
             password: '',
-            username: null
+            username: null,
+            lang: navigator.language || navigator.userLanguage
         };
     }
 
@@ -156,10 +158,17 @@ export class Login extends Component {
         toast.success('Vous avez bien été déconnecté');
     }
 
+    changeLanguage = (lang) => {
+
+        this.setState({
+            lang: lang
+        });
+    }
+
 
     render() {
 
-        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary } = this.state;
+        const { authorized, isAdmin, errorRegister, errorSignIn, email, password, signIn, accessTemporary, lang } = this.state;
         return (
             <React.Fragment>
                 {!authorized
@@ -191,10 +200,11 @@ export class Login extends Component {
                         </React.Fragment>
                     )
                     : (signIn || isAdmin
-                        ? <Home isAdmin={isAdmin} accessTemporary={accessTemporary} signOut={this.signOut} />
-                        : <SignIn />
+                        ? <Home lang={lang} isAdmin={isAdmin} accessTemporary={accessTemporary} signOut={this.signOut} />
+                        : <SignIn lang={lang} />
                     )
                 }
+                <Lang lang={lang} changeLanguage={this.changeLanguage} />
                 <ToastContainer />
             </React.Fragment>
         );

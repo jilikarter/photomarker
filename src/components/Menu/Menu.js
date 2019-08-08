@@ -27,7 +27,6 @@ export class Menu extends Component {
                 const date = moment(user.metadata.lastSignInTime);
 
                 let username = user.email;
-                console.log(user.displayName);
                 if(null !== user.displayName) {
                     username = user.displayName;
                 }
