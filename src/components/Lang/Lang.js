@@ -18,10 +18,10 @@ export class Lang extends Component {
         const { lang } = this.props;
         return (
             <React.Fragment>
-                <div className="lang-container">
-                    <button className={`lang lang--fr${lang === 'fr-FR' ? ' lang--active' : ''}`} onClick={() => this.changeLanguage('fr-FR')}></button>
-                    <button className={`lang lang--en${lang === 'en-EN' ? ' lang--active' : ''}`}  onClick={() => this.changeLanguage('en-EN')}></button>
-                </div>
+                {/*<div className="lang-container">*/}
+                {/*<button className={`lang lang--fr${lang === 'fr-FR' ? ' lang--active' : ''}`} onClick={() => this.changeLanguage('fr-FR')}></button>*/}
+                {/*<button className={`lang lang--en${lang === 'en-EN' ? ' lang--active' : ''}`}  onClick={() => this.changeLanguage('en-EN')}></button>*/}
+            {/*</div>*/}
             </React.Fragment>
         );
     }
