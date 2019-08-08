@@ -131,6 +131,9 @@ export class Login extends Component {
                     case 'auth/wrong-password':
                         toast.error('Le mot de passe ou l\'email ne correspondent pas');
                         break;
+                    case 'auth/user-disabled':
+                        toast.info('Votre compte a été désactivé, veuillez contacter le responsable du site');
+                        break;
                     default:
                         toast.error('Une erreur est survenue lors de la tentative de connection, veuillez réessayer plus tard : code erreur 5');
 
@@ -150,7 +153,7 @@ export class Login extends Component {
             signIn: false
         });
         fbSignOut();
-        toast.info('Vous avez bien été déconnecté');
+        toast.success('Vous avez bien été déconnecté');
     }
 
 

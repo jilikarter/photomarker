@@ -44,7 +44,7 @@ export class Form extends Component {
             this.setState({
                 picture: reader.result
             });
-            toast.info('La photo à bien été uploadé');
+            toast.success('La photo à bien été uploadé');
         };
         reader.readAsDataURL(file);
     }

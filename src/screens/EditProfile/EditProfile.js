@@ -27,7 +27,7 @@ export class EditProfile extends Component {
         user.updateProfile({
             displayName: name
         }).then(function() {
-            toast.info('Votre profil a bien été mis à jour');
+            toast.success('Votre profil a bien été mis à jour');
         }).catch(function(error) {
             toast.error('Une erreur est survenue lors de l\'enregistrement, veuillez contacter le responsable du site : code erreur 6');
         });

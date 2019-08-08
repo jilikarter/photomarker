@@ -66,7 +66,7 @@ export class Tile extends Component {
             disposition: disposition
         });
         update(true);
-        toast.info('La photo a bien été mise à jour');
+        toast.success('La photo a bien été mise à jour');
     }
 
     async deleteTile() {
@@ -77,7 +77,7 @@ export class Tile extends Component {
             await fbdeletePicture(datas.filename);
             await deleteArticle(datas.id);
             update(true);
-            toast.info('La photo a bien été supprimée');
+            toast.success('La photo a bien été supprimée');
         }
     }
 
