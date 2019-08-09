@@ -198,6 +198,8 @@
     .add-form {
         transform: translateX(20px) translateY(20px);
     }
+}
+@media screen and (min-width: 740px) {
     .add-form__content__add:hover,
     .add-form__content__reset:hover {
         font-size: 0;

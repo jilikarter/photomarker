@@ -6,8 +6,9 @@ import editIcon from '../../assets/images/edit.svg';
 import saveIcon from '../../assets/images/save.svg';
 import deleteIcon from '../../assets/images/delete.svg';
 import { toast } from 'react-toastify';
-import {Time} from "../Time/Time";
-import {Trad} from "../Trad/Trad";
+import { Time } from "../Time/Time";
+import { Trad } from "../Trad/Trad";
+import Img from 'react-fix-image-orientation';
 
 import './Tile.css';
 
@@ -94,6 +95,7 @@ export class Tile extends Component {
 
         let className = isAdmin ? "tile tile--admin" : "tile";
         className += this.state.mode === 'edition' ? " tile--edition" : "";
+
         return (
             <React.Fragment>
                 {
@@ -102,7 +104,7 @@ export class Tile extends Component {
                             <Time time={timestamp} mode={this.state.mode} getTimestamp={this.updateTimestamp} />
                             <p className="tile__geolocalisation">{GeolocalisationIcon}<input placeholder="Ville" type="text" value={city ? city : ''} onChange={e => this.setState({ city: e.target.value})} /></p>
                             <figure className="tile__picture">
-                                <img alt="little think" title="" src={picture} />
+                                <Img alt="little think" title="" src={picture} />
                             </figure>
                             <p className="tile__text"><textarea placeholder="[FR] petite phrase en surplus (facultative)" type="text" value={text} onChange={e => this.setState({ text: e.target.value})} /></p>
                             <p className="tile__text"><textarea placeholder="[EN] little extra sentence (optional)" type="text" value={textEn} onChange={e => this.setState({ textEn: e.target.value})} /></p>
@@ -118,7 +120,7 @@ export class Tile extends Component {
                                     : null
                             }
                             <figure className={`tile__picture${picture === null ? ' tile__picture--pending' : ''}`}>
-                                <img alt="little think" title="" src={picture} />
+                                <Img alt="little think" title="" src={picture} />
                             </figure>
                             {
                                 lang === 'fr-FR' && text
