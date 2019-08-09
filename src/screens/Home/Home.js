@@ -8,12 +8,6 @@ import './Home.css';
 
 export class Home extends Component {
 
-    constructor(props) {
-        super(props);
-
-
-    }
-
     render() {
         const { lang, isAdmin, accessTemporary, signOut } = this.props;
         return (

@@ -14,7 +14,7 @@ export class Trad extends Component {
             'login.connection.separator': 'Ou',
 
             /* LOGIN - TO REGISTERING */
-            'login.register.title': "Enregistrez-vous",
+            'login.register.title': "Enregistrez vous",
             'login.register.explain': "Veuillez rentrer ci-dessous le mot de passe qui vous a été fourni avec l'adresse du site",
             'login.register.error-message': "Le mot de passe saisi n'est pas correct. En cas d'oubli ou perte de mot de passe, veuillez vous rapprochez de la personne qui vous l'a fourni.",
             'login.register.submit': "Créer votre compte",

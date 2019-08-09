@@ -152,7 +152,7 @@ export class Login extends Component {
     }
 
     signOut = () => {
-        const { lang } = this.state;
+        const { lang } = this.props;
         this.setState({
             authorized: false,
             signIn: false

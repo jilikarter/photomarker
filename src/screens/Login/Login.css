@@ -6,6 +6,7 @@
 }
 
 .login__title {
+    max-width: calc(100vw - 120px);
     margin: 0 0 .5em;
     font-size: 2.5rem;
     line-height: 1.3em;
