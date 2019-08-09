@@ -88,7 +88,8 @@ export class Login extends Component {
 
         e.preventDefault();
 
-        const { lang, email, password } = this.state;
+        const { lang } = this.props;
+        const { email, password } = this.state;
         this.setState({
             errorSignIn: false
         });
