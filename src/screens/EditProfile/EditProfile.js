@@ -77,7 +77,8 @@ export class EditProfile extends Component {
                     user
                     ?   <section className="edit">
                             <h1 className="edit__title"><Trad lang={lang} code={'editProfile.title'}/></h1>
-                            <input className="edit__input" type="text" value={name} onChange={(e) => this.setState({name: e.target.value})} placeholder="Votre pseudo" />
+                            <label className="edit__label" htmlFor="username"><Trad lang={lang} code={'editProfile.pseudo.label'}/></label>
+                            <input className="edit__input" id="username" type="text" value={name} onChange={(e) => this.setState({name: e.target.value})} />
                             <button className="edit__button" onClick={() => this.save()}><Trad lang={lang} code={'editProfile.submit'}/></button>
                             <Link className="edit__button" to={'/'}><Trad lang={lang} code={'editProfile.return'}/></Link>
                             <ToastContainer />

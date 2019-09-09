@@ -30,6 +30,9 @@ export class Trad extends Component {
 
             /* SIGN IN */
             'signIn.title': "Je crée mon compte",
+            'signIn.pseudo.label': "Votre pseudo (facultatif)",
+            'signIn.email.label': "Votre adresse email",
+            'signIn.password.label': "Votre mot de passe",
             'signIn.info': "Après la création du compte, un mail vous sera envoyé pour confirmer votre email. Pensez à cliquer sur le lien.",
             'signIn.submit': "Créer mon compte",
 
@@ -70,6 +73,7 @@ export class Trad extends Component {
 
             /* EDIT PROFILE */
             'editProfile.title': "Edition du profil",
+            'editProfile.pseudo.label': "Votre pseudo (optionnel)",
             'editProfile.submit': "Sauvegarder",
             'editProfile.return': "Retour",
 
@@ -108,6 +112,9 @@ export class Trad extends Component {
 
             /* SIGN IN */
             'signIn.title': "I create my account",
+            'signIn.pseudo.label': "Your username (optional)",
+            'signIn.email.label': "Your mail",
+            'signIn.password.label': "Your password",
             'signIn.info': "After the account creation, an email will be sent to you to confirm your email. Remember to click on the link.",
             'signIn.submit': "Create my account",
 
@@ -148,6 +155,7 @@ export class Trad extends Component {
 
             /* EDIT PROFILE */
             'editProfile.title': "Editing the profile",
+            'editProfile.pseudo.label': "Your username (optional)",
             'editProfile.submit': "Save",
             'editProfile.return': "Return",
 

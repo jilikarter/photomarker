@@ -15,6 +15,14 @@
     font-style: italic;
     opacity: .5;
 }
+.sign-in__label {
+    margin-top: 1em;
+    font-size: .8em;
+}
+.sign-in__label--required::after {
+    content: " *";
+    color: #E91E63;
+}
 .sign-in__input {
     min-width: 200px;
     margin: .5em;
